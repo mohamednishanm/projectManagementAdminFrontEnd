@@ -6,11 +6,12 @@ import { AddTeamMembers } from './add-team-members/add-team-members';
 import { Customer } from './customer/customer';
 import { Risk } from './risk/risk';
 import { BasicProjectDetailForm } from './basic-project-detail-form/basic-project-detail-form';
+import { Pmform } from './pmform/pmform';
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, Sidebar, AddTeamMembers, Customer, Risk, BasicProjectDetailForm],
+  imports: [RouterOutlet, Header, Sidebar, AddTeamMembers, Customer, Risk, BasicProjectDetailForm,Pmform],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
