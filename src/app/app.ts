@@ -5,6 +5,7 @@ import { Sidebar } from './sidebar/sidebar';
 import { AddTeamMembers } from './add-team-members/add-team-members';
 import { Customer } from './customer/customer';
 
+
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, Header, Sidebar, AddTeamMembers, Customer],
