@@ -1,97 +1,111 @@
-<p>milestone works!</p>
-
-            <div class="modal-body">
-                <div class="form-group">
-                    <label class="form-label" for="milestoneName">Milestone Name *</label>
-                    <input type="text" id="milestoneName" class="form-input" placeholder="Enter milestone name"
-                        required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="milestoneDescription">Description</label>
-                    <textarea id="milestoneDescription" class="form-input"
-                        placeholder="Describe milestone objectives..."></textarea>
-                </div>
-                <div class="date-row">
-                    <div class="form-group">
-                        <label class="form-label" for="milestoneStartDate">Start Date *</label>
-                        <input type="date" id="milestoneStartDate" class="form-input" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="milestoneEndDate">End Date *</label>
-                        <input type="date" id="milestoneEndDate" class="form-input" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="milestoneStatus">Initial Status</label>
-
-                    <div class="custom-select" id="milestoneStatus">
-                        <div class="custom-select-trigger">Select Status</div>
-                        <div class="custom-options">
-                            <div class="custom-option" data-value="pending">Pending</div>
-                            <div class="custom-option" data-value="in-progress">In Progress</div>
-                            <div class="custom-option" data-value="completed">Completed</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="modal-actions">
-                <button class="btn-secondary">Cancel</button>
-                <button class="btn-primary" id="addMilestoneConfirmBtn">
-                    <i class="fas fa-check"></i> Add Milestone
-                </button>
-            </div>
-
-
-
-    <!-- Add Milestone Modal
-    <div class="modal-overlay" id="addMilestoneModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Add Milestone</h3>
-                <button class="close-btn">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label class="form-label" for="milestoneName">Milestone Name *</label>
-                    <input type="text" id="milestoneName" class="form-input" placeholder="Enter milestone name"
-                        required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="milestoneDescription">Description</label>
-                    <textarea id="milestoneDescription" class="form-input"
-                        placeholder="Describe milestone objectives..."></textarea>
-                </div>
-                <div class="date-row">
-                    <div class="form-group">
-                        <label class="form-label" for="milestoneStartDate">Start Date *</label>
-                        <input type="date" id="milestoneStartDate" class="form-input" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="milestoneEndDate">End Date *</label>
-                        <input type="date" id="milestoneEndDate" class="form-input" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="milestoneStatus">Initial Status</label>
-
-                    <div class="custom-select" id="milestoneStatus">
-                        <div class="custom-select-trigger">Select Status</div>
-                        <div class="custom-options">
-                            <div class="custom-option" data-value="pending">Pending</div>
-                            <div class="custom-option" data-value="in-progress">In Progress</div>
-                            <div class="custom-option" data-value="completed">Completed</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-actions">
-                <button class="btn-secondary">Cancel</button>
-                <button class="btn-primary" id="addMilestoneConfirmBtn">
-                    <i class="fas fa-check"></i> Add Milestone
-                </button>
-            </div>
+<div class="form-section">
+  <div class="modal-header">
+    <h3 class="modal-title">Add Milestone</h3>
+  </div>
+ 
+  <form (submit)="$event.preventDefault(); addMilestone()">
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label" for="milestoneName">Milestone Name *</label>
+        <input
+          type="text"
+          id="milestoneName"
+          class="form-input"
+          placeholder="Enter milestone name"
+          [(ngModel)]="milestoneName"
+          name="milestoneName"
+          required
+        />
+      </div>
+ 
+      <div class="form-group">
+        <label class="form-label" for="milestoneDescription">Description</label>
+        <textarea
+          id="milestoneDescription"
+          class="form-input"
+          placeholder="Describe milestone objectives..."
+          [(ngModel)]="milestoneDescription"
+          name="milestoneDescription"
+        ></textarea>
+      </div>
+ 
+      <div class="date-row">
+        <div class="form-group">
+          <label class="form-label" for="milestoneStartDate">Start Date *</label>
+          <input
+            type="date"
+            id="milestoneStartDate"
+            class="form-input"
+            [(ngModel)]="milestoneStartDate"
+            name="milestoneStartDate"
+            required
+          />
         </div>
-    </div> -->
+        <div class="form-group">
+          <label class="form-label" for="milestoneEndDate">End Date *</label>
+          <input
+            type="date"
+            id="milestoneEndDate"
+            class="form-input"
+            [(ngModel)]="milestoneEndDate"
+            name="milestoneEndDate"
+            required
+          />
+        </div>
+      </div>
+ 
+      <div class="form-group">
+        <label class="form-label">Initial Status *</label>
+        <div
+          class="custom-select"
+          [class.open]="dropdownOpen"
+          (click)="toggleDropdown()"
+        >
+          <div class="custom-select-trigger">
+            {{ milestoneStatus || 'Select Status' }}
+          </div>
+          <div class="custom-options" *ngIf="dropdownOpen">
+            <div
+              class="custom-option"
+              (click)="selectStatus('Pending'); $event.stopPropagation()"
+            >
+              Pending
+            </div>
+            <div
+              class="custom-option"
+              (click)="selectStatus('In Progress'); $event.stopPropagation()"
+            >
+              In Progress
+            </div>
+            <div
+              class="custom-option"
+              (click)="selectStatus('Completed'); $event.stopPropagation()"
+            >
+              Completed
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="modal-actions">
+      <button type="submit" class="btn-primary" id="addMilestoneConfirmBtn">
+        <i class="fas fa-check"></i> Add Milestone
+      </button>
+    </div>
+  </form>
+ 
+  <!-- ✅ Milestone List inside same form -->
+  <div *ngIf="milestones.length > 0" class="team-list">
+    <h3 class="section-title">Milestones</h3>
+    <ul>
+      <li *ngFor="let m of milestones">
+        <strong>{{ m.name }}</strong>  
+        ({{ m.startDate }} → {{ m.endDate }}) –  
+        <em>{{ m.status }}</em>
+      </li>
+    </ul>
+  </div>
+</div>
+ 
+ 

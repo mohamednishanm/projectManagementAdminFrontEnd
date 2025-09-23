@@ -1,1 +1,9 @@
-<app-milestone></app-milestone>
+<div class="app-container" [class.sidebar-collapsed]="sidebarCollapsed()">
+    <app-sidebar (sidebarToggled)="onSidebarToggle($event)"></app-sidebar>
+    <div class="main-content">
+        <app-header></app-header>
+        <main class="content">
+            <router-outlet></router-outlet>
+        </main>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+.app-container {
+    display: flex;
+    min-height: 100vh;
+    background: #f8fafc;
+    --header-left-padding: 280px;
+}
+
+.app-container.sidebar-collapsed {
+    --header-left-padding: 70px;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin-left: 280px;
+    transition: margin-left 0.3s ease;
+}
+
+.app-container.sidebar-collapsed .main-content {
+    margin-left: 70px;
+}
+
+.content {
+    flex: 1;
+    padding: 94px 24px 24px 24px;
+    overflow-y: auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar-toggle {
+        display: block !important;
+    }
+    
+    .sidebar {
+        left: -280px;
+        z-index: 1001;
+    }
+    
+    .sidebar.mobile-open {
+        left: 0;
+    }
+    
+    .main-content {
+        margin-left: 0 !important;
+    }
+    
+    .header {
+        left: 0 !important;
+    }
+    
+    .app-container {
+        --header-left-padding: 0px !important;
+    }
+    
+    .app-container.sidebar-collapsed .main-content {
+        margin-left: 0 !important;
+    }
+}

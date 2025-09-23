@@ -1,0 +1,40 @@
+<aside class="sidebar" [class.collapsed]="isCollapsed" [class.mobile-open]="isMobileOpen" id="sidebar">
+    <div class="sidebar-header" (click)="dashboardRedirect()">
+        <div class="logo">
+            <i class="fas fa-project-diagram"></i>
+            <span>ProjectFlow</span>
+        </div>
+    </div>
+
+    <nav class="sidebar-nav">
+        <a href="#" class="nav-item" (click)="onNavItemClick($event)">
+            <i class="fas fa-chart-line"></i>
+            <span>Dashboard</span>
+        </a>
+        <a href="#" class="nav-item active" (click)="onNavItemClick($event)">
+            <i class="fas fa-folder"></i>
+            <span>Projects</span>
+        </a>
+        <a href="#" class="nav-item" (click)="onNavItemClick($event)">
+            <i class="fas fa-bell"></i>
+            <span>Notifications</span>
+        </a>
+        <a href="#" class="nav-item" (click)="onNavItemClick($event)">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+        </a>
+    </nav>
+
+    <div class="sidebar-footer">
+        <div class="user-profile">
+            <div class="avatar">SJ</div>
+            <div class="user-info">
+                <div class="name">Sarah Johnson</div>
+                <div class="role">Project Manager</div>
+            </div>
+            <button class="toggle-btn" id="sidebarToggle" (click)="toggleSidebar()">
+                <i class="fas" [class.fa-chevron-left]="!isCollapsed" [class.fa-chevron-right]="isCollapsed"></i>
+            </button>
+        </div>
+    </div>
+</aside>
