@@ -76,6 +76,18 @@
         ></textarea>
       </div>
     </form>
+
+    <!-- Form Actions -->
+    <div class="form-actions">
+      <button type="button" class="btn-secondary" (click)="onCancel()">
+        <i class="fas fa-times"></i>
+        Cancel
+      </button>
+      <button type="submit" class="btn-primary" (click)="onSubmit()" [disabled]="!customerForm.valid">
+        <i class="fas fa-save"></i>
+        Save Customer
+      </button>
+    </div>
   </div>
 
   <!-- Customer Details Display Section -->
@@ -115,17 +127,5 @@
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- Form Actions -->
-  <div class="form-actions">
-    <button type="button" class="btn-secondary" (click)="onCancel()">
-      <i class="fas fa-times"></i>
-      Cancel
-    </button>
-    <button type="submit" class="btn-primary" (click)="onSubmit()" [disabled]="!customerForm.valid">
-      <i class="fas fa-save"></i>
-      Save Customer
-    </button>
   </div>
 </div>
