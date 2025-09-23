@@ -1,0 +1,75 @@
+<div class="form-section">
+  <h2 class="section-title">
+    <fa-icon [icon]="icon" />
+    Project Information
+  </h2>
+
+  <div class="form-group">
+    <label class="form-label" for="projectName">Project Name *</label>
+    <input
+      type="text"
+      id="projectName"
+      class="form-input"
+      placeholder="Enter project name"
+      required
+      [value]="projectName"
+      (change)="onProjectNameChange($event)"
+    />
+  </div>
+
+  <div class="form-group">
+    <label class="form-label" for="projectDescription">Description *</label>
+    <textarea
+      id="projectDescription"
+      class="form-input form-textarea"
+      placeholder="Describe your project objectives and goals..."
+      required
+      [value]="projectDescription"
+      (change)="onProjectDescriptionChange($event)"
+    ></textarea>
+  </div>
+
+  <div class="form-group">
+    <label class="form-label" for="projectPriority">Priority</label>
+
+    <div class="custom-select" id="projectPriority">
+      <div class="custom-select-trigger form-label" id="selectedPriority">Select Priority</div>
+      <select
+        name=""
+        id=""
+        class="priority-option"
+        [value]="projectPriority"
+        (change)="onProjectPriorityChange($event)"
+      >
+        <option *ngFor="let priority of priorityLevels" [value]="priority">
+          {{ priority.value }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="date-row">
+    <div class="form-group">
+      <label class="form-label" for="startDate">Start Date</label>
+      <input
+        type="date"
+        id="startDate"
+        class="form-input"
+        required
+        [value]="startDate"
+        (change)="onProjectStartDateChange($event)"
+      />
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="endDate">End Date</label>
+      <input
+        type="date"
+        id="endDate"
+        class="form-input"
+        required
+        [value]="endDate"
+        (change)="onProjectEndDateChange($event)"
+      />
+    </div>
+  </div>
+</div>
