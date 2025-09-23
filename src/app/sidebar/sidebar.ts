@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,6 +7,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
   styleUrl: './sidebar.css'
 })
 export class Sidebar implements OnInit {
+  @Output() sidebarToggled = new EventEmitter<boolean>();
   isCollapsed = false;
   isMobileOpen = false;
   
@@ -16,6 +17,11 @@ export class Sidebar implements OnInit {
     if (savedState === 'true' && window.innerWidth > 768) {
       this.isCollapsed = true;
     }
+    // Emit initial state
+    setTimeout(() => {
+      this.sidebarToggled.emit(this.isCollapsed);
+      console.log('Initial sidebar state:', this.isCollapsed);
+    }, 0);
   }
 
   @HostListener('window:resize', ['$event'])
@@ -34,6 +40,8 @@ export class Sidebar implements OnInit {
   toggleSidebar(): void {
     this.isCollapsed = !this.isCollapsed;
     localStorage.setItem('sidebarCollapsed', this.isCollapsed.toString());
+    this.sidebarToggled.emit(this.isCollapsed);
+    console.log('Sidebar toggled:', this.isCollapsed);
   }
 
   toggleMobileSidebar(): void {

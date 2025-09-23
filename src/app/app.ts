@@ -11,4 +11,10 @@ import { Sidebar } from './sidebar/sidebar';
 })
 export class App {
   protected readonly title = signal('projectmanagementAdminfrontend');
+  sidebarCollapsed = signal(false);
+
+  onSidebarToggle(collapsed: boolean): void {
+    this.sidebarCollapsed.set(collapsed);
+    console.log('App received sidebar toggle:', collapsed);
+  }
 }
