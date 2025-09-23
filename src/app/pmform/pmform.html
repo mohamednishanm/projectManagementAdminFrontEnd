@@ -1,0 +1,117 @@
+<div class="pm-container">
+  <h2>Project Manager Details</h2>
+
+  <!-- Form -->
+  <form [formGroup]="pmForm" (ngSubmit)="onSubmit(pmForm.value)" class="pm-form">
+
+    <!-- Name & ID -->
+    <div class="form-row">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" formControlName="fullName" class="form-input"/>
+        <small *ngIf="pmForm.get('fullName')?.invalid && pmForm.get('fullName')?.touched" class="error-message">
+          Name is required (min 3 chars).
+        </small>
+      </div>
+      <div class="form-group">
+        <label>Employee ID</label>
+        <input type="text" formControlName="employeeId" class="form-input"/>
+        <small *ngIf="pmForm.get('employeeId')?.invalid && pmForm.get('employeeId')?.touched" class="error-message">
+          Employee ID is required.
+        </small>
+      </div>
+    </div>
+
+    <!-- Dept & Designation -->
+    <div class="form-row">
+      <div class="form-group">
+        <label>Department</label>
+        <input type="text" formControlName="department" class="form-input"/>
+      </div>
+      <div class="form-group">
+        <label>Designation</label>
+        <select formControlName="designation" class="form-input">
+          <option value="">Select</option>
+          <option *ngFor="let r of roles" [value]="r">{{r}}</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Email & Phone -->
+    <div class="form-row">
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" formControlName="email" class="form-input"/>
+      </div>
+      <div class="form-group">
+        <label>Phone</label>
+        <input type="text" formControlName="phone" class="form-input"/>
+      </div>
+    </div>
+
+    <!-- Role & Exp -->
+    <div class="form-row">
+      <div class="form-group">
+        <label>Role</label>
+        <input type="text" formControlName="role" class="form-input"/>
+      </div>
+      <div class="form-group">
+        <label>Experience (Years)</label>
+        <input type="number" formControlName="experience" class="form-input"/>
+      </div>
+    </div>
+
+    <!-- Workload & Certifications -->
+    <div class="form-row">
+      <div class="form-group">
+        <label>Workload %</label>
+        <input type="number" formControlName="workload" class="form-input"/>
+      </div>
+      <div class="form-group">
+        <label>Certifications</label>
+        <input type="text" formControlName="certifications" class="form-input"/>
+      </div>
+    </div>
+
+    <!-- Privileges -->
+    <div class="form-group">
+      <label>Privileges</label>
+      <div class="checkbox-group">
+        <label *ngFor="let p of privileges" class="checkbox-inline">
+          <input type="checkbox" [value]="p" [checked]="pmForm.get('privileges')?.value.includes(p)" (change)="onPrivilegeChange($event)">
+          {{p}}
+        </label>
+      </div>
+    </div>
+
+    <!-- Notes -->
+    <div class="form-group">
+      <label>Notes</label>
+      <textarea formControlName="notes" class="form-textarea"></textarea>
+    </div>
+
+    <!-- Submit -->
+    <div class="form-actions">
+      <button type="submit" class="btn-primary" [disabled]="pmForm.invalid">Save</button>
+    </div>
+  </form>
+
+  <!-- Submitted Data -->
+  <div *ngIf="submittedData" class="submitted-data fade-in">
+    <h3>Submitted Details</h3>
+    <div class="submitted-grid">
+      <div><strong>Name:</strong> {{ submittedData.fullName }}</div>
+      <div><strong>ID:</strong> {{ submittedData.employeeId }}</div>
+      <div><strong>Dept:</strong> {{ submittedData.department }}</div>
+      <div><strong>Designation:</strong> {{ submittedData.designation }}</div>
+      <div><strong>Email:</strong> {{ submittedData.email }}</div>
+      <div><strong>Phone:</strong> {{ submittedData.phone }}</div>
+      <div><strong>Role:</strong> {{ submittedData.role }}</div>
+      <div><strong>Exp:</strong> {{ submittedData.experience }} yrs</div>
+      <div><strong>Workload:</strong> {{ submittedData.workload }}%</div>
+      <div><strong>Certifications:</strong> {{ submittedData.certifications }}</div>
+      <div><strong>Privileges:</strong> {{ submittedData.privileges?.join(', ') }}</div>
+      <div><strong>Notes:</strong> {{ submittedData.notes }}</div>
+    </div>
+  </div>
+</div>
