@@ -5,6 +5,13 @@
     flex: 1;
 }
 
+.page-title{
+    font-size: 22px;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 24px;
+}
+
 .form-section {
     background: white;
     padding: 24px;
