@@ -1,0 +1,89 @@
+<div class="create-content">
+  <form id="createProjectForm" (submit)="$event.preventDefault(); addMember()">
+    <div class="form-section">
+      <h2 class="page-title">Add Team Members</h2>
+      <div class="form-group">
+        <label class="form-label" for="memberName">Name *</label>
+        <input
+          type="text"
+          id="memberName"
+          class="form-input"
+          placeholder="Enter member name"
+          [(ngModel)]="memberName"
+          name="memberName"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="memberEmail">Email</label>
+        <input
+          type="email"
+          id="memberEmail"
+          class="form-input"
+          placeholder="Enter email address"
+          [(ngModel)]="memberEmail"
+          name="memberEmail"
+        />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Role *</label>
+        <div
+          class="custom-select"
+          [class.open]="dropdownOpen"
+          (click)="toggleDropdown()"
+        >
+          <div class="custom-select-trigger">
+            {{ selectedRole || 'Select Role' }}
+          </div>
+          <div class="custom-options" *ngIf="dropdownOpen">
+            <div
+              class="custom-option"
+              (click)="selectRole('Administrator'); $event.stopPropagation()"
+            >
+              <div class="option-title">Administrator</div>
+              <div class="option-subtext">
+                Full access to manage projects and team
+              </div>
+            </div>
+            <div
+              class="custom-option"
+              (click)="selectRole('Member'); $event.stopPropagation()"
+            >
+              <div class="option-title">Member</div>
+              <div class="option-subtext">
+                Can contribute to assigned projects
+              </div>
+            </div>
+            <div
+              class="custom-option"
+              (click)="selectRole('Viewer'); $event.stopPropagation()"
+            >
+              <div class="option-title">Viewer</div>
+              <div class="option-subtext">
+                Read-only access to view project details
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="button-container">
+          <button class="btn-primary" type="submit" id="addMemberConfirmBtn">
+            <i class="fas fa-check"></i> Add Member
+          </button>
+        </div>
+      </div>
+
+      <!-- ✅ Team Members inside same rounded container -->
+      <div *ngIf="teamMembers.length > 0" class="team-list">
+        <h3 class="section-title">Team Members</h3>
+        <ul>
+          <li *ngFor="let member of teamMembers">
+            <strong>{{ member.name }}</strong> – {{ member.role }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,131 @@
+<div class="create-content">
+  <div class="form-section">
+    <h2 class="section-title">
+      <i class="fas fa-user-circle"></i>
+      Customer Details
+    </h2>
+    
+    <form #customerForm="ngForm" (ngSubmit)="onSubmit()">
+      <!-- Customer ID and Customer Name in same row -->
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="customerId">Customer ID <span class="required-asterisk">*</span></label>
+          <input 
+            type="text" 
+            id="customerId"
+            name="customerId"
+            class="form-input"
+            placeholder="Enter customer ID"
+            [(ngModel)]="customerData.customerId"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="customerName">Customer Name/Organisation <span class="required-asterisk">*</span></label>
+          <input 
+            type="text" 
+            id="customerName"
+            name="customerName"
+            class="form-input"
+            placeholder="Enter customer name or organisation"
+            [(ngModel)]="customerData.customerName"
+            required
+          />
+        </div>
+      </div>
+
+      <!-- Primary Contact Person -->
+      <div class="form-group">
+  <label class="form-label" for="primaryContact">Primary Contact Person <span class="required-asterisk">*</span></label>
+        <input 
+          type="text" 
+          id="primaryContact"
+          name="primaryContact"
+          class="form-input"
+          placeholder="Enter primary contact person name"
+          [(ngModel)]="customerData.primaryContact"
+          required
+        />
+      </div>
+
+      <!-- Email ID -->
+      <div class="form-group">
+  <label class="form-label" for="emailId">Email ID <span class="required-asterisk">*</span></label>
+        <input 
+          type="email" 
+          id="emailId"
+          name="emailId"
+          class="form-input"
+          placeholder="Enter email address"
+          [(ngModel)]="customerData.emailId"
+          required
+        />
+      </div>
+
+      <!-- Billing Address / Location -->
+      <div class="form-group">
+  <label class="form-label" for="billingAddress">Billing Address / Location <span class="required-asterisk">*</span></label>
+        <textarea 
+          id="billingAddress"
+          name="billingAddress"
+          class="form-input form-textarea"
+          placeholder="Enter billing address or location"
+          [(ngModel)]="customerData.billingAddress"
+          required
+        ></textarea>
+      </div>
+    </form>
+
+    <!-- Form Actions -->
+    <div class="form-actions">
+      <button type="button" class="btn-secondary" (click)="onCancel()">
+        <i class="fas fa-times"></i>
+        Cancel
+      </button>
+      <button type="submit" class="btn-primary" (click)="onSubmit()" [disabled]="!customerForm.valid">
+        <i class="fas fa-save"></i>
+        Save Customer
+      </button>
+    </div>
+  </div>
+
+  <!-- Customer Details Display Section -->
+  <div class="form-section" *ngIf="isSubmitted && submittedCustomerData">
+    <h2 class="section-title">
+      <i class="fas fa-check-circle"></i>
+      Customer Information 
+    </h2>
+    
+    <div class="customer-display">
+      <div class="display-row">
+        <div class="display-item">
+          <span class="display-label">Customer ID:</span>
+          <span class="display-value">{{ submittedCustomerData.customerId }}</span>
+        </div>
+        <div class="display-item">
+          <span class="display-label">Customer Name/Organisation:</span>
+          <span class="display-value">{{ submittedCustomerData.customerName }}</span>
+        </div>
+      </div>
+      
+      <div class="display-row">
+        <div class="display-item">
+          <span class="display-label">Primary Contact Person:</span>
+          <span class="display-value">{{ submittedCustomerData.primaryContact }}</span>
+        </div>
+        <div class="display-item">
+          <span class="display-label">Email ID:</span>
+          <span class="display-value">{{ submittedCustomerData.emailId }}</span>
+        </div>
+      </div>
+      
+      <div class="display-row full-width">
+        <div class="display-item">
+          <span class="display-label">Billing Address / Location:</span>
+          <span class="display-value address">{{ submittedCustomerData.billingAddress }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
