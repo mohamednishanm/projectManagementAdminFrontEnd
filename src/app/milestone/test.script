@@ -1,0 +1,43 @@
+window.editMilestone = function (index) {
+    const milestone = currentProject.milestones[index];
+    if (!milestone) return;
+
+    document.getElementById('milestoneName').value = milestone.name;
+    document.getElementById('milestoneDescription').value = milestone.description;
+    document.getElementById('milestoneStartDate').value = milestone.startDate;
+    document.getElementById('milestoneEndDate').value = milestone.endDate;
+
+    const trigger = document.querySelector('#milestoneStatus .custom-select-trigger');
+    trigger.textContent = milestone.status;
+    trigger.dataset.value = milestone.status;
+
+    addMilestoneModal.style.display = 'flex';
+
+    const confirmBtn = document.querySelector('#addMilestoneModal .btn-primary');
+    confirmBtn.textContent = 'Update Milestone';
+
+    confirmBtn.onclick = () => {
+        const name = document.getElementById('milestoneName').value.trim();
+        const description = document.getElementById('milestoneDescription').value.trim();
+        const startDate = document.getElementById('milestoneStartDate').value;
+        const endDate = document.getElementById('milestoneEndDate').value;
+        const status = trigger.dataset.value;
+
+        currentProject.updateMilestone(index, { name, description, startDate, endDate, status });
+
+        renderMilestones();
+        addMilestoneModal.style.display = 'none';
+        resetMilestoneModal();
+
+        // restore original add mode
+        confirmBtn.textContent = 'Add Milestone';
+        confirmBtn.onclick = confirmAddMilestone;
+    };
+};
+
+
+
+window.removeMilestone = function (index) {
+    currentProject.removeMilestone(index);
+    renderMilestones();
+};
