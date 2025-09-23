@@ -5,7 +5,7 @@ import { CommonModule, JsonPipe } from '@angular/common';
 @Component({
   selector: 'app-pmform',
   standalone: true,   // make sure if using Angular 15+ standalone
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, JsonPipe], // <-- add JsonPipe here
+  imports: [CommonModule, FormsModule, ReactiveFormsModule], // <-- add JsonPipe here
   templateUrl: './pmform.html',
   styleUrls: ['./pmform.css'],
 })
