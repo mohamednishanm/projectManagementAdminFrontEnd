@@ -14,13 +14,10 @@
 }
 
 .form-title {
-  color: #1f2937;
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 24px;
-  text-align: center;
-  border-bottom: 3px solid #3b82f6;
-  padding-bottom: 12px;
+   font-size: 18px;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 20px;
 }
 
 .risk-form {

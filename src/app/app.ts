@@ -4,11 +4,13 @@ import { Header } from './header/header';
 import { Sidebar } from './sidebar/sidebar';
 import { AddTeamMembers } from './add-team-members/add-team-members';
 import { Customer } from './customer/customer';
+import { Risk } from './risk/risk';
+import { BasicProjectDetailForm } from './basic-project-detail-form/basic-project-detail-form';
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, Sidebar, AddTeamMembers, Customer],
+  imports: [RouterOutlet, Header, Sidebar, AddTeamMembers, Customer, Risk, BasicProjectDetailForm],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
