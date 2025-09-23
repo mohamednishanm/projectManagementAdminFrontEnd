@@ -1,0 +1,49 @@
+    <div class="modal-overlay" id="addMemberModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Add Team Member</h3>
+                <button class="close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- <div class="form-group">
+                    <label class="form-label" for="memberName">Name *</label>
+                    <input type="text" id="memberName" class="form-input" placeholder="Enter member name" required>
+                </div> -->
+                <div class="form-group">
+                    <label class="form-label" for="memberEmail">Email</label>
+                    <input type="email" id="memberEmail" class="form-input" placeholder="Enter email address">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="projectMemberRole">Role *</label>
+
+                    <div class="custom-select" id="projectMemberRole">
+                        <div class="custom-select-trigger">Select Role</div>
+                        <div class="custom-options">
+                            <div class="custom-option" data-value="Administrator">
+                                <div class="option-title">Administrator</div>
+                                <div class="option-subtext">Full access to manage projects and team</div>
+                            </div>
+                            <div class="custom-option" data-value="Member">
+                                <div class="option-title">Member</div>
+                                <div class="option-subtext">Can contribute to assigned projects</div>
+                            </div>
+                            <div class="custom-option" data-value="Viewer">
+                                <div class="option-title">Viewer</div>
+                                <div class="option-subtext">Read-only access to view project details</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-actions">
+                <button class="btn-secondary">Cancel</button>
+                <button class="btn-primary" id="addMemberConfirmBtn">
+                    <i class="fas fa-check"></i> Add Member
+                </button>
+            </div>
+        </div>
+    </div>
