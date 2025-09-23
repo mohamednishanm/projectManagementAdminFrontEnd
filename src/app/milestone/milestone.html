@@ -1,0 +1,97 @@
+<p>milestone works!</p>
+
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label" for="milestoneName">Milestone Name *</label>
+                    <input type="text" id="milestoneName" class="form-input" placeholder="Enter milestone name"
+                        required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="milestoneDescription">Description</label>
+                    <textarea id="milestoneDescription" class="form-input"
+                        placeholder="Describe milestone objectives..."></textarea>
+                </div>
+                <div class="date-row">
+                    <div class="form-group">
+                        <label class="form-label" for="milestoneStartDate">Start Date *</label>
+                        <input type="date" id="milestoneStartDate" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="milestoneEndDate">End Date *</label>
+                        <input type="date" id="milestoneEndDate" class="form-input" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="milestoneStatus">Initial Status</label>
+
+                    <div class="custom-select" id="milestoneStatus">
+                        <div class="custom-select-trigger">Select Status</div>
+                        <div class="custom-options">
+                            <div class="custom-option" data-value="pending">Pending</div>
+                            <div class="custom-option" data-value="in-progress">In Progress</div>
+                            <div class="custom-option" data-value="completed">Completed</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="btn-secondary">Cancel</button>
+                <button class="btn-primary" id="addMilestoneConfirmBtn">
+                    <i class="fas fa-check"></i> Add Milestone
+                </button>
+            </div>
+
+
+
+    <!-- Add Milestone Modal
+    <div class="modal-overlay" id="addMilestoneModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Add Milestone</h3>
+                <button class="close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label" for="milestoneName">Milestone Name *</label>
+                    <input type="text" id="milestoneName" class="form-input" placeholder="Enter milestone name"
+                        required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="milestoneDescription">Description</label>
+                    <textarea id="milestoneDescription" class="form-input"
+                        placeholder="Describe milestone objectives..."></textarea>
+                </div>
+                <div class="date-row">
+                    <div class="form-group">
+                        <label class="form-label" for="milestoneStartDate">Start Date *</label>
+                        <input type="date" id="milestoneStartDate" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="milestoneEndDate">End Date *</label>
+                        <input type="date" id="milestoneEndDate" class="form-input" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="milestoneStatus">Initial Status</label>
+
+                    <div class="custom-select" id="milestoneStatus">
+                        <div class="custom-select-trigger">Select Status</div>
+                        <div class="custom-options">
+                            <div class="custom-option" data-value="pending">Pending</div>
+                            <div class="custom-option" data-value="in-progress">In Progress</div>
+                            <div class="custom-option" data-value="completed">Completed</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-secondary">Cancel</button>
+                <button class="btn-primary" id="addMilestoneConfirmBtn">
+                    <i class="fas fa-check"></i> Add Milestone
+                </button>
+            </div>
+        </div>
+    </div> -->
