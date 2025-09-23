@@ -1,0 +1,165 @@
+.sidebar {
+    width: 280px;
+    height: 100vh;
+    background: white;
+    border-right: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.sidebar.collapsed {
+    width: 70px;
+}
+
+.sidebar-header {
+    padding: 20px;
+    border-bottom: 1px solid #e2e8f0;
+    height: 70px;
+    cursor: pointer;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #6366f1;
+}
+
+.logo i {
+    font-size: 24px;
+}
+
+.sidebar-nav {
+    flex: 1;
+    padding: 0 20px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    margin: 4px 0;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #64748b;
+    transition: all 0.2s ease;
+}
+
+.nav-item:hover {
+    background: #f1f5f9;
+    color: #334155;
+}
+
+.nav-item.active {
+    background: #eef2ff;
+    color: #6366f1;
+}
+
+.nav-item i {
+    width: 20px;
+    text-align: center;
+}
+
+.sidebar-footer {
+    padding: 20px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background: #6366f1;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+
+.user-info {
+    flex: 1;
+}
+
+.user-info .name {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.user-info .role {
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+.toggle-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #94a3b8;
+    padding: 8px;
+    border-radius: 6px;
+}
+
+.toggle-btn:hover {
+    background: #f1f5f9;
+}
+
+/* Collapsed sidebar styles */
+.sidebar.collapsed .logo span,
+.sidebar.collapsed .nav-item span,
+.sidebar.collapsed .user-info {
+    display: none;
+}
+
+.sidebar.collapsed .nav-item {
+    justify-content: center;
+    padding: 12px;
+}
+
+.sidebar.collapsed .sidebar-nav {
+    padding: 0;
+}
+
+/* Normal layout (expanded) */
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+}
+
+/* Hide user info in collapsed state */
+.sidebar.collapsed .user-info {
+    display: none;
+}
+
+/* Stack avatar and toggle vertically in collapsed state */
+.sidebar.collapsed .user-profile {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.sidebar.collapsed .toggle-btn {
+    order: 2;
+    padding: 6px;
+}
+
+.sidebar.collapsed .avatar {
+    order: 1;
+}
