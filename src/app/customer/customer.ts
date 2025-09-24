@@ -4,9 +4,10 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-customer',
+  standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './customer.html',
-  styleUrl: './customer.css'
+  styleUrls: ['./customer.css']
 })
 export class Customer {
   customerData = {
@@ -20,25 +21,21 @@ export class Customer {
   submittedCustomerData: any = null;
   isSubmitted = false;
 
+  // Validation: check all fields are non-empty
+  private isFormValid(): boolean {
+    return Object.values(this.customerData).every(value => value && value.trim() !== '');
+  }
+
   onSubmit() {
     if (this.isFormValid()) {
-      
       this.submittedCustomerData = { ...this.customerData };
       this.isSubmitted = true;
-      
-      console.log('Customer Data:', this.submittedCustomerData);
-      
     } else {
-      alert('Please fill in all required fields.');
+      alert(' Please fill in all required fields before saving.');
     }
   }
 
-  private isFormValid(): boolean {
-    return Object.values(this.customerData).every(value => value.trim() !== '');
-  }
-
   onCancel() {
-    
     this.customerData = {
       customerId: '',
       customerName: '',
@@ -46,7 +43,7 @@ export class Customer {
       emailId: '',
       billingAddress: ''
     };
-    this.submittedCustomerData = null;
     this.isSubmitted = false;
+    this.submittedCustomerData = null;
   }
 }
