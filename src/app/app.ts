@@ -15,7 +15,7 @@ import { Milestone } from './milestone/milestone';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, Sidebar, AddTeamMembers, Customer, Risk, BasicProjectDetailForm,Pmform, Milestone],
+  imports: [Header, Sidebar, AddTeamMembers, Customer, Risk, BasicProjectDetailForm,Pmform, Milestone],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
