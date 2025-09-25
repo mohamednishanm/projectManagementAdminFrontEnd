@@ -5,16 +5,19 @@
       Customer Details
     </h2>
 
-    <!-- Input fields -->
+    <form #customerForm="ngForm">
+      <!-- Input fields -->
     <div class="form-row">
       <div class="form-group">
         <label class="form-label" for="customerId">Customer ID *</label>
         <input 
           type="text" 
           id="customerId"
+          name="customerId"
           class="form-input"
           placeholder="Enter customer ID"
           [(ngModel)]="customerData.customerId"
+          required
         />
       </div>
 
@@ -23,22 +26,26 @@
         <input 
           type="text" 
           id="customerName"
+          name="customerName"
           class="form-input"
           placeholder="Enter customer name or organisation"
           [(ngModel)]="customerData.customerName"
+          required
         />
       </div>
     </div>
 
-<<<<<<< HEAD
+
     <div class="form-group">
       <label class="form-label" for="primaryContact">Primary Contact Person *</label>
       <input 
         type="text" 
         id="primaryContact"
+        name="primaryContact"
         class="form-input"
         placeholder="Enter primary contact person name"
         [(ngModel)]="customerData.primaryContact"
+        required
       />
     </div>
 
@@ -47,9 +54,11 @@
       <input 
         type="email" 
         id="emailId"
+        name="emailId"
         class="form-input"
         placeholder="Enter email address"
         [(ngModel)]="customerData.emailId"
+        required
       />
     </div>
 
@@ -57,23 +66,13 @@
       <label class="form-label" for="billingAddress">Billing Address / Location *</label>
       <textarea 
         id="billingAddress"
+        name="billingAddress"
         class="form-input form-textarea"
         placeholder="Enter billing address or location"
         [(ngModel)]="customerData.billingAddress"
+        required
       ></textarea>
-=======
-      <!-- Billing Address / Location -->
-      <div class="form-group">
-  <label class="form-label" for="billingAddress">Billing Address / Location <span class="required-asterisk">*</span></label>
-        <textarea 
-          id="billingAddress"
-          name="billingAddress"
-          class="form-input form-textarea"
-          placeholder="Enter billing address or location"
-          [(ngModel)]="customerData.billingAddress"
-          required
-        ></textarea>
-      </div>
+    </div>
     </form>
 
     <!-- Form Actions -->
@@ -86,7 +85,6 @@
         <i class="fas fa-save"></i>
         Save Customer
       </button>
->>>>>>> 822aaca72c0e6a765e6a7dbe375dbd7ab9ecf594
     </div>
   </div>
 
@@ -129,18 +127,6 @@
     </div>
   </div>
 
-<<<<<<< HEAD
-  <!-- Action Buttons -->
-  <div class="form-actions">
-    <button type="button" class="btn-secondary" (click)="onCancel()">
-      <i class="fas fa-times"></i>
-      Cancel
-    </button>
-    <button type="button" class="btn-primary" (click)="onSubmit()">
-      <i class="fas fa-save"></i>
-      Save Customer
-    </button>
-  </div>
-=======
->>>>>>> 822aaca72c0e6a765e6a7dbe375dbd7ab9ecf594
+
+
 </div>
