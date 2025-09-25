@@ -1,5 +1,5 @@
 
 import { Routes } from '@angular/router';
-import { Customer } from './customer/customer';
+import { Pmform } from './pmform/pmform';
 
 export const routes: Routes = [];

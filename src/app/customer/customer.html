@@ -30,6 +30,7 @@
       </div>
     </div>
 
+<<<<<<< HEAD
     <div class="form-group">
       <label class="form-label" for="primaryContact">Primary Contact Person *</label>
       <input 
@@ -60,6 +61,32 @@
         placeholder="Enter billing address or location"
         [(ngModel)]="customerData.billingAddress"
       ></textarea>
+=======
+      <!-- Billing Address / Location -->
+      <div class="form-group">
+  <label class="form-label" for="billingAddress">Billing Address / Location <span class="required-asterisk">*</span></label>
+        <textarea 
+          id="billingAddress"
+          name="billingAddress"
+          class="form-input form-textarea"
+          placeholder="Enter billing address or location"
+          [(ngModel)]="customerData.billingAddress"
+          required
+        ></textarea>
+      </div>
+    </form>
+
+    <!-- Form Actions -->
+    <div class="form-actions">
+      <button type="button" class="btn-secondary" (click)="onCancel()">
+        <i class="fas fa-times"></i>
+        Cancel
+      </button>
+      <button type="submit" class="btn-primary" (click)="onSubmit()" [disabled]="!customerForm.valid">
+        <i class="fas fa-save"></i>
+        Save Customer
+      </button>
+>>>>>>> 822aaca72c0e6a765e6a7dbe375dbd7ab9ecf594
     </div>
   </div>
 
@@ -102,6 +129,7 @@
     </div>
   </div>
 
+<<<<<<< HEAD
   <!-- Action Buttons -->
   <div class="form-actions">
     <button type="button" class="btn-secondary" (click)="onCancel()">
@@ -113,4 +141,6 @@
       Save Customer
     </button>
   </div>
+=======
+>>>>>>> 822aaca72c0e6a765e6a7dbe375dbd7ab9ecf594
 </div>

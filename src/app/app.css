@@ -28,6 +28,21 @@
     overflow-y: auto;
 }
 
+/* Page Title */
+.page-title {
+    font-size: 2rem;
+    margin: 24px;
+    font-weight: 700;
+    color: #1e293b;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid #667eea;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: left;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .sidebar-toggle {
@@ -59,3 +74,48 @@
         margin-left: 0 !important;
     }
 }
+
+/* Button Container - positioned to the right */
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 24px;
+}
+
+/* Create Project Button */
+.create-project-btn {
+    background: #6366f1;
+    color: white;
+    border: none;
+    padding: 16px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+}
+
+.create-project-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+    background: #5a6fd8;
+}
+
+
+
+/* Responsive adjustments for button */
+@media (max-width: 768px) {
+    .button-container {
+        justify-content: center;
+        padding: 16px 0;
+    }
+    
+    .create-project-btn {
+        padding: 14px 20px;
+        font-size: 14px;
+        min-width: 140px;
+    }
+}
+
