@@ -25,6 +25,6 @@ export class App {
 
   onSidebarToggle(collapsed: boolean): void {
     this.sidebarCollapsed.set(collapsed);
-    console.log('App received sidebar toggle:', collapsed);
+    // console.log('App received sidebar toggle:', collapsed);
   }
 }

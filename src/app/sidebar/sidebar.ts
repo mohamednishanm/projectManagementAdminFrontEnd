@@ -34,14 +34,14 @@ export class Sidebar implements OnInit {
 
   dashboardRedirect(): void {
     // Add your dashboard redirect logic here
-    console.log('Dashboard redirect clicked');
+    // console.log('Dashboard redirect clicked');
   }
 
   toggleSidebar(): void {
     this.isCollapsed = !this.isCollapsed;
     localStorage.setItem('sidebarCollapsed', this.isCollapsed.toString());
     this.sidebarToggled.emit(this.isCollapsed);
-    console.log('Sidebar toggled:', this.isCollapsed);
+    // console.log('Sidebar toggled:', this.isCollapsed);
   }
 
   toggleMobileSidebar(): void {

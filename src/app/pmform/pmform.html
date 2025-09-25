@@ -7,14 +7,14 @@
     <!-- Name & ID -->
     <div class="form-row">
       <div class="form-group">
-        <label>Full Name</label>
+        <label>Full Name *</label>
         <input type="text" formControlName="fullName" class="form-input"/>
         <small *ngIf="pmForm.get('fullName')?.invalid && pmForm.get('fullName')?.touched" class="error-message">
-          Name is required (min 3 chars).
+          Full Name is required (min 3 chars).
         </small>
       </div>
       <div class="form-group">
-        <label>Employee ID</label>
+        <label>Employee ID *</label>
         <input type="text" formControlName="employeeId" class="form-input"/>
         <small *ngIf="pmForm.get('employeeId')?.invalid && pmForm.get('employeeId')?.touched" class="error-message">
           Employee ID is required.
@@ -22,17 +22,22 @@
       </div>
     </div>
 
-    <!-- Dept & Designation -->
+    <!-- Department -->
     <div class="form-row">
       <div class="form-group">
         <label>Department</label>
-        <input type="text" formControlName="department" class="form-input"/>
-      </div>
-      <div class="form-group">
-        <label>Designation</label>
-        <select formControlName="designation" class="form-input">
-          <option value="">Select</option>
-          <option *ngFor="let r of roles" [value]="r">{{r}}</option>
+        <select formControlName="department" class="form-input">
+          <option value="">Select Department</option>
+          <option value="IT">Information Technology</option>
+          <option value="HR">Human Resources</option>
+          <option value="Finance">Finance</option>
+          <option value="Marketing">Marketing</option>
+          <option value="Operations">Operations</option>
+          <option value="Sales">Sales</option>
+          <option value="Engineering">Engineering</option>
+          <option value="Quality Assurance">Quality Assurance</option>
+          <option value="Research & Development">Research & Development</option>
+          <option value="Customer Support">Customer Support</option>
         </select>
       </div>
     </div>
@@ -40,8 +45,11 @@
     <!-- Email & Phone -->
     <div class="form-row">
       <div class="form-group">
-        <label>Email</label>
+        <label>Email *</label>
         <input type="email" formControlName="email" class="form-input"/>
+        <small *ngIf="pmForm.get('email')?.invalid && pmForm.get('email')?.touched" class="error-message">
+          Valid email is required.
+        </small>
       </div>
       <div class="form-group">
         <label>Phone</label>
@@ -49,29 +57,9 @@
       </div>
     </div>
 
-    <!-- Role & Exp -->
-    <div class="form-row">
-      <div class="form-group">
-        <label>Role</label>
-        <input type="text" formControlName="role" class="form-input"/>
-      </div>
-      <div class="form-group">
-        <label>Experience (Years)</label>
-        <input type="number" formControlName="experience" class="form-input"/>
-      </div>
-    </div>
 
-    <!-- Workload & Certifications -->
-    <div class="form-row">
-      <div class="form-group">
-        <label>Workload %</label>
-        <input type="number" formControlName="workload" class="form-input"/>
-      </div>
-      <div class="form-group">
-        <label>Certifications</label>
-        <input type="text" formControlName="certifications" class="form-input"/>
-      </div>
-    </div>
+
+
 
     <!-- Privileges -->
     <div class="form-group">
@@ -84,11 +72,7 @@
       </div>
     </div>
 
-    <!-- Notes -->
-    <div class="form-group">
-      <label>Notes</label>
-      <textarea formControlName="notes" class="form-textarea"></textarea>
-    </div>
+
 
     <!-- Submit -->
     <div class="form-actions">
@@ -103,15 +87,9 @@
       <div><strong>Name:</strong> {{ submittedData.fullName }}</div>
       <div><strong>ID:</strong> {{ submittedData.employeeId }}</div>
       <div><strong>Dept:</strong> {{ submittedData.department }}</div>
-      <div><strong>Designation:</strong> {{ submittedData.designation }}</div>
       <div><strong>Email:</strong> {{ submittedData.email }}</div>
       <div><strong>Phone:</strong> {{ submittedData.phone }}</div>
-      <div><strong>Role:</strong> {{ submittedData.role }}</div>
-      <div><strong>Exp:</strong> {{ submittedData.experience }} yrs</div>
-      <div><strong>Workload:</strong> {{ submittedData.workload }}%</div>
-      <div><strong>Certifications:</strong> {{ submittedData.certifications }}</div>
       <div><strong>Privileges:</strong> {{ submittedData.privileges?.join(', ') }}</div>
-      <div><strong>Notes:</strong> {{ submittedData.notes }}</div>
     </div>
   </div>
 </div>
