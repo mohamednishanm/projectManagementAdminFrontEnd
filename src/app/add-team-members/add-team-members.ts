@@ -35,13 +35,24 @@ export class AddTeamMembers {
     'Engineering'
   ];
 
-  isSubmitted = false;
-  submissionDate = new Date();
+  // Storage for submitted team members
+  teamMembers: any[] = [];
 
   onSubmit() {
     if (this.memberName && this.memberRole && this.memberEmail) {
-      this.isSubmitted = true;
-      this.submissionDate = new Date();
+      const newMember = {
+        name: this.memberName,
+        email: this.memberEmail,
+        role: this.memberRole,
+        department: this.memberDepartment,
+        phone: this.memberPhone,
+        submittedDate: new Date()
+      };
+
+      this.teamMembers.push(newMember);
+
+      // Reset form
+      this.resetForm();
     }
   }
 
@@ -51,6 +62,10 @@ export class AddTeamMembers {
     this.memberRole = '';
     this.memberDepartment = '';
     this.memberPhone = '';
-    this.isSubmitted = false;
+  }
+
+  clearAllMembers() {
+    this.teamMembers = [];
+    this.resetForm();
   }
 }

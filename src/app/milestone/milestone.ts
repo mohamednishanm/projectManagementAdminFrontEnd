@@ -1,15 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule, UpperCasePipe, TitleCasePipe, DatePipe } from '@angular/common';
 
-interface MilestoneItem {
-  name: string;
-  description: string;
-  startDate: string;
-  endDate: string;
-  status: string;
-  submittedDate: Date;
-}
-
 @Component({
   selector: 'app-milestone',
   standalone: true,
@@ -28,8 +19,8 @@ export class Milestone {
   // Dropdown options
   statusOptions = ['Pending', 'In Progress', 'Completed', 'On Hold'];
 
-  // Storage for submitted milestones
-  milestones: MilestoneItem[] = [];
+  // Multiple milestones storage
+  milestones: any[] = [];
 
   onSubmit() {
     if (!this.milestoneName || !this.milestoneStartDate || !this.milestoneEndDate || !this.milestoneStatus) {
@@ -37,7 +28,7 @@ export class Milestone {
       return;
     }
 
-    const newMilestone: MilestoneItem = {
+    const newMilestone = {
       name: this.milestoneName,
       description: this.milestoneDescription,
       startDate: this.milestoneStartDate,
@@ -58,5 +49,10 @@ export class Milestone {
     this.milestoneStartDate = '';
     this.milestoneEndDate = '';
     this.milestoneStatus = '';
+  }
+
+  clearAllMilestones() {
+    this.milestones = [];
+    this.resetForm();
   }
 }

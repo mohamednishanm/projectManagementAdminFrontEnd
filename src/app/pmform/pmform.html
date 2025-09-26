@@ -23,9 +23,7 @@
         <label>Department</label>
         <select [value]="department" (change)="department = $any($event.target).value" class="form-input">
           <option value="">Select Department</option>
-          @for (dept of departmentOptions; track dept) {
-            <option [value]="dept">{{ dept }}</option>
-          }
+          <option *ngFor="let dept of departmentOptions" [value]="dept">{{ dept }}</option>
         </select>
       </div>
 
@@ -42,26 +40,22 @@
     </div>
   </div>
 
-  <!-- Show submitted PM forms -->
-  @if (pmForms.length > 0) {
-    <div class="submitted-data">
-      <h3>Project Manager List</h3>
+  <!-- Show submitted PM form -->
+  <div *ngIf="pmForm" class="submitted-data">
+      <h3>Project Manager Details</h3>
       <div class="data-list">
-        @for (pm of pmForms; track pm; let i = $index) {
-          <div class="data-item">
-            <div class="item-header">
-              <strong>Project Manager {{ i + 1 }}</strong>
-              <span class="submitted-date">{{ pm.submittedDate | date:'medium' }}</span>
-            </div>
-            <div class="item-details">
-              <p><strong>Name:</strong> {{ pm.fullName | titlecase }}</p>
-              <p><strong>Employee ID:</strong> {{ pm.employeeId | uppercase }}</p>
-              <p><strong>Department:</strong> {{ pm.department || 'Not specified' }}</p>
-              <p><strong>Email:</strong> {{ pm.email }}</p>
-            </div>
+        <div class="data-item">
+          <div class="item-header">
+            <strong>Project Manager Information</strong>
+            <span class="submitted-date">{{ pmForm.submittedDate | date:'medium' }}</span>
           </div>
-        }
+          <div class="item-details">
+            <p><strong>Name:</strong> {{ pmForm.fullName | titlecase }}</p>
+            <p><strong>Employee ID:</strong> {{ pmForm.employeeId | uppercase }}</p>
+            <p><strong>Department:</strong> {{ pmForm.department || 'Not specified' }}</p>
+            <p><strong>Email:</strong> {{ pmForm.email }}</p>
+          </div>
+        </div>
       </div>
     </div>
-  }
-</div>
+  </div>

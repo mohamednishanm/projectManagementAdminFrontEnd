@@ -1,15 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule, UpperCasePipe, TitleCasePipe, DatePipe } from '@angular/common';
 
-interface CustomerItem {
-  id: string;
-  name: string;
-  contact: string;
-  email: string;
-  address: string;
-  submittedDate: Date;
-}
-
 @Component({
   selector: 'app-customer',
   standalone: true,
@@ -25,12 +16,12 @@ export class Customer {
   emailId = '';
   billingAddress = '';
 
-  // Storage for submitted customers
-  customers: CustomerItem[] = [];
+  // Single customer storage
+  customer: any = null;
 
   onSubmit() {
     if (this.customerId && this.customerName && this.emailId) {
-      const newCustomer: CustomerItem = {
+      this.customer = {
         id: this.customerId,
         name: this.customerName,
         contact: this.primaryContact,
@@ -38,15 +29,6 @@ export class Customer {
         address: this.billingAddress,
         submittedDate: new Date()
       };
-
-      this.customers.push(newCustomer);
-
-      // Reset form
-      this.customerId = '';
-      this.customerName = '';
-      this.primaryContact = '';
-      this.emailId = '';
-      this.billingAddress = '';
     }
   }
 
@@ -56,5 +38,6 @@ export class Customer {
     this.primaryContact = '';
     this.emailId = '';
     this.billingAddress = '';
+    this.customer = '';
   }
 }

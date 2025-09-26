@@ -14,9 +14,7 @@
         <label>Status *</label>
         <select [value]="milestoneStatus" (change)="milestoneStatus = $any($event.target).value" class="form-input">
           <option value="">Select status</option>
-          @for (status of statusOptions; track status) {
-            <option [value]="status">{{ status | titlecase }}</option>
-          }
+          <option *ngFor="let status of statusOptions" [value]="status">{{ status | titlecase }}</option>
         </select>
       </div>
     </div>
@@ -48,31 +46,29 @@
     <!-- Action Buttons -->
     <div class="form-actions">
       <button type="button" (click)="onSubmit()" class="btn-primary">Add Milestone</button>
+      <button type="button" (click)="resetForm()" class="btn-secondary">Reset Form</button>
+      <button type="button" (click)="clearAllMilestones()" class="btn-danger" *ngIf="milestones.length > 0">Clear All Milestones</button>
     </div>
   </div>
 
   <!-- Show submitted milestones -->
-  @if (milestones.length > 0) {
-    <div class="submitted-data">
-      <h3>Milestone List</h3>
-      <div class="data-list">
-        @for (milestone of milestones; track milestone; let i = $index) {
-          <div class="data-item">
-            <div class="item-header">
-              <strong>Milestone {{ i + 1 }}: {{ milestone.name | titlecase }}</strong>
-              <span class="submitted-date">{{ milestone.submittedDate | date:'medium' }}</span>
-            </div>
-            <div class="item-details">
-              <p><strong>Description:</strong> {{ milestone.description || 'No description provided' }}</p>
-              <p><strong>Start Date:</strong> {{ milestone.startDate }}</p>
-              <p><strong>End Date:</strong> {{ milestone.endDate }}</p>
-              <p><strong>Status:</strong> {{ milestone.status | titlecase }}</p>
-            </div>
-          </div>
-        }
+  <div *ngIf="milestones.length > 0" class="submitted-data">
+    <h3>Milestones List</h3>
+    <div class="data-list">
+      <div *ngFor="let milestone of milestones; let i = index" class="data-item">
+        <div class="item-header">
+          <strong>Milestone {{ i + 1 }}: {{ milestone.name | titlecase }}</strong>
+          <span class="submitted-date">{{ milestone.submittedDate | date:'medium' }}</span>
+        </div>
+        <div class="item-details">
+          <p><strong>Description:</strong> {{ milestone.description || 'No description provided' }}</p>
+          <p><strong>Start Date:</strong> {{ milestone.startDate | date:'mediumDate' }}</p>
+          <p><strong>End Date:</strong> {{ milestone.endDate | date:'mediumDate' }}</p>
+          <p><strong>Status:</strong> {{ milestone.status | titlecase }}</p>
+        </div>
       </div>
     </div>
-  }
-</div>
+  </div>
+  </div>
  
  

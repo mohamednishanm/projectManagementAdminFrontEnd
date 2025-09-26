@@ -47,23 +47,23 @@
     </div>
   </div>
 
-  <!-- Show submitted customers -->
-  <div *ngIf="customers.length > 0" class="submitted-data">
-    <h3>Customer List</h3>
-    <div class="data-list">
-      <div *ngFor="let customer of customers; let i = index" class="data-item">
-        <div class="item-header">
-          <strong>Customer {{ i + 1 }}</strong>
-          <span class="submitted-date">{{ customer.submittedDate | date:'medium' }}</span>
-        </div>
-        <div class="item-details">
-          <p><strong>ID:</strong> {{ customer.id | uppercase }}</p>
-          <p><strong>Name:</strong> {{ customer.name | titlecase }}</p>
-          <p><strong>Contact:</strong> {{ customer.contact || 'Not provided' }}</p>
-          <p><strong>Email:</strong> {{ customer.email }}</p>
-          <p><strong>Address:</strong> {{ customer.address || 'Not provided' }}</p>
+  <!-- Show submitted customer -->
+  <div *ngIf="customer" class="submitted-data">
+      <h3>Customer Details</h3>
+      <div class="data-list">
+        <div class="data-item">
+          <div class="item-header">
+            <strong>Customer Information</strong>
+            <span class="submitted-date">{{ customer.submittedDate | date:'medium' }}</span>
+          </div>
+          <div class="item-details">
+            <p><strong>ID:</strong> {{ customer.id | uppercase }}</p>
+            <p><strong>Name:</strong> {{ customer.name | titlecase }}</p>
+            <p><strong>Contact:</strong> {{ customer.contact || 'Not provided' }}</p>
+            <p><strong>Email:</strong> {{ customer.email }}</p>
+            <p><strong>Address:</strong> {{ customer.address || 'Not provided' }}</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>

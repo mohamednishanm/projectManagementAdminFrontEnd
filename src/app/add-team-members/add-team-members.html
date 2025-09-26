@@ -48,20 +48,28 @@
     <!-- Action Buttons -->
     <div class="form-actions">
       <button type="button" (click)="onSubmit()" class="btn-primary">Add Team Member</button>
+      <button type="button" (click)="resetForm()" class="btn-secondary">Reset Form</button>
+      <button type="button" (click)="clearAllMembers()" class="btn-danger" *ngIf="teamMembers.length > 0">Clear All Members</button>
     </div>
   </div>
 
-  <!-- Show submitted data with pipes -->
-  <div *ngIf="isSubmitted" class="submitted-data">
-    <h3>Team Member Information</h3>
-    <div class="member-details">
-      <p><strong>Name:</strong> {{ memberName | titlecase }}</p>
-      <p><strong>Email:</strong> {{ memberEmail }}</p>
-      <p><strong>Role:</strong> {{ memberRole | uppercase }}</p>
-      <p><strong>Department:</strong> {{ memberDepartment | titlecase }}</p>
-      <p><strong>Phone:</strong> {{ memberPhone || 'Not provided' }}</p>
-      <p><strong>Added Date:</strong> {{ submissionDate | date:'medium' }}</p>
-      <p><strong>Day:</strong> {{ submissionDate | date:'EEEE' | titlecase }}</p>
+  <!-- Show submitted team members -->
+  <div *ngIf="teamMembers.length > 0" class="submitted-data">
+    <h3>Team Members List</h3>
+    <div class="data-list">
+      <div *ngFor="let member of teamMembers; let i = index" class="data-item">
+        <div class="item-header">
+          <strong>Team Member {{ i + 1 }}</strong>
+          <span class="submitted-date">{{ member.submittedDate | date:'medium' }}</span>
+        </div>
+        <div class="item-details">
+          <p><strong>Name:</strong> {{ member.name | titlecase }}</p>
+          <p><strong>Email:</strong> {{ member.email }}</p>
+          <p><strong>Role:</strong> {{ member.role | uppercase }}</p>
+          <p><strong>Department:</strong> {{ member.department | titlecase }}</p>
+          <p><strong>Phone:</strong> {{ member.phone || 'Not provided' }}</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>

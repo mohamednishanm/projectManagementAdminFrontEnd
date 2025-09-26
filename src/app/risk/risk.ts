@@ -15,6 +15,7 @@ interface RiskItem {
 
 @Component({
   selector: 'app-risk',
+  standalone: true,
   imports: [CommonModule, UpperCasePipe, TitleCasePipe, DatePipe],
   templateUrl: './risk.html',
   styleUrl: './risk.css'
@@ -36,8 +37,7 @@ export class Risk {
   progressOptions = ['Not Started', 'In Progress', 'Completed', 'On Hold'];
 
   // Storage for submitted risks
-  risks: RiskItem[] = [];
-  nextId = 1;
+  risks: any[] = [];
 
   onSubmit() {
     // Validate required fields
@@ -48,8 +48,7 @@ export class Risk {
       return;
     }
 
-    const newRisk: RiskItem = {
-      id: this.nextId++,
+    const newRisk = {
       title: this.riskTitle,
       description: this.description,
       category: this.category,
@@ -74,5 +73,10 @@ export class Risk {
     this.impact = '';
     this.mitigationPlan = '';
     this.progress = '';
+  }
+
+  clearAllRisks() {
+    this.risks = [];
+    this.resetForm();
   }
 }

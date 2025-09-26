@@ -67,27 +67,29 @@
     <!-- Action Buttons -->
     <div class="form-actions">
       <button type="button" (click)="onSubmit()" class="btn-primary">Add Risk</button>
+      <button type="button" (click)="resetForm()" class="btn-secondary">Reset Form</button>
+      <button type="button" (click)="clearAllRisks()" class="btn-danger" *ngIf="risks.length > 0">Clear All Risks</button>
     </div>
   </div>
 
   <!-- Show submitted risks -->
   <div *ngIf="risks.length > 0" class="submitted-data">
-    <h3>Risk List</h3>
-    <div class="data-list">
-      <div *ngFor="let risk of risks; let i = index" class="data-item">
-        <div class="item-header">
-          <strong>Risk {{ i + 1 }}: {{ risk.title | titlecase }}</strong>
-          <span class="submitted-date">{{ risk.submittedDate | date:'medium' }}</span>
-        </div>
-        <div class="item-details">
-          <p><strong>Category:</strong> {{ risk.category | titlecase }}</p>
-          <p><strong>Description:</strong> {{ risk.description }}</p>
-          <p><strong>Probability:</strong> {{ risk.probability | uppercase }}</p>
-          <p><strong>Impact:</strong> {{ risk.impact | uppercase }}</p>
-          <p><strong>Mitigation:</strong> {{ risk.mitigationPlan }}</p>
-          <p><strong>Progress:</strong> {{ risk.progress | titlecase }}</p>
-        </div>
+      <h3>Risk List</h3>
+      <div class="data-list">
+        <div *ngFor="let risk of risks; let i = index" class="data-item">
+            <div class="item-header">
+              <strong>Risk {{ i + 1 }}: {{ risk.title | titlecase }}</strong>
+              <span class="submitted-date">{{ risk.submittedDate | date:'medium' }}</span>
+            </div>
+            <div class="item-details">
+              <p><strong>Category:</strong> {{ risk.category | titlecase }}</p>
+              <p><strong>Description:</strong> {{ risk.description }}</p>
+              <p><strong>Probability:</strong> {{ risk.probability | uppercase }}</p>
+              <p><strong>Impact:</strong> {{ risk.impact | uppercase }}</p>
+              <p><strong>Mitigation:</strong> {{ risk.mitigationPlan }}</p>
+              <p><strong>Progress:</strong> {{ risk.progress | titlecase }}</p>
+            </div>
+          </div>
       </div>
     </div>
-  </div>
 </div>

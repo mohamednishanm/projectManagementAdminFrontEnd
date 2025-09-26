@@ -1,15 +1,9 @@
 import { Component } from '@angular/core';
 import { NgIf, UpperCasePipe, TitleCasePipe, DatePipe } from '@angular/common';
 
-interface ProjectItem {
-  name: string;
-  description: string;
-  priority: string;
-  submittedDate: Date;
-}
-
 @Component({
   selector: 'app-basic-project-detail-form',
+  standalone: true,
   imports: [NgIf, UpperCasePipe, TitleCasePipe, DatePipe],
   templateUrl: './basic-project-detail-form.html',
   styleUrl: './basic-project-detail-form.css',
@@ -19,6 +13,9 @@ export class BasicProjectDetailForm {
   projectName = '';
   projectDescription = '';
   projectPriority = '';
+  projectStartDate = '';
+  projectEndDate = '';
+  projectStatus = '';
 
   // Dropdown options for priority
   priorities = [
@@ -28,24 +25,29 @@ export class BasicProjectDetailForm {
     'Critical'
   ];
 
-  // Storage for submitted projects
-  projects: ProjectItem[] = [];
+  // Dropdown options for status
+  statusOptions = [
+    'Planning',
+    'In Progress',
+    'On Hold',
+    'Completed',
+    'Cancelled'
+  ];
+
+  // Single project storage
+  project: any = null;
 
   onSubmit() {
     if (this.projectName && this.projectDescription) {
-      const newProject: ProjectItem = {
+      this.project = {
         name: this.projectName,
         description: this.projectDescription,
         priority: this.projectPriority,
+        startDate: this.projectStartDate,
+        endDate: this.projectEndDate,
+        status: this.projectStatus,
         submittedDate: new Date()
       };
-
-      this.projects.push(newProject);
-
-      // Reset form
-      this.projectName = '';
-      this.projectDescription = '';
-      this.projectPriority = '';
     }
   }
 
@@ -53,5 +55,9 @@ export class BasicProjectDetailForm {
     this.projectName = '';
     this.projectDescription = '';
     this.projectPriority = '';
+    this.projectStartDate = '';
+    this.projectEndDate = '';
+    this.projectStatus = '';
+    this.project = null;
   }
 }
