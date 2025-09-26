@@ -5,19 +5,17 @@
     <!-- Project Name & Priority -->
     <div class="form-row">
       <div class="form-group">
-        <label>Project Name *</label>
-        <input type="text" [value]="projectName" (input)="projectName = $any($event.target).value"
-               class="form-input" placeholder="Enter project name"/>
+      <label>Project Name *</label>
+      <input type="text" [value]="projectName" (input)="projectName = $any($event.target).value"
+           class="form-input" placeholder="Enter project name"/>
       </div>
 
       <div class="form-group">
-        <label>Priority</label>
-        <select [value]="projectPriority" (change)="projectPriority = $any($event.target).value" class="form-input">
-          <option value="">Select Priority</option>
-          @for (priority of priorities; track priority) {
-            <option [value]="priority">{{ priority | titlecase }}</option>
-          }
-        </select>
+      <label>Priority</label>
+      <select [value]="projectPriority" (change)="projectPriority = $any($event.target).value" class="form-input">
+        <option value="">Select Priority</option>
+        <option *ngFor="let priority of priorities" [value]="priority">{{ priority | titlecase }}</option>
+      </select>
       </div>
     </div>
 
