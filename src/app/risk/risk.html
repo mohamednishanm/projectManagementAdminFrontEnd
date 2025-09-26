@@ -1,177 +1,93 @@
 <div class="risk-container">
-  <div class="risk-form-card">
-    <h2 class="form-title">Add New Risk</h2>
-    
-    <form (ngSubmit)="onSubmit()" #riskForm="ngForm" class="risk-form">
-      <!-- Risk Title -->
+  <h2>Risk Management</h2>
+
+  <div class="form-section">
+    <!-- Risk Title & Category -->
+    <div class="form-row">
       <div class="form-group">
-        <label for="riskTitle" class="form-label">Risk Title</label>
-        <input 
-          type="text" 
-          id="riskTitle" 
-          name="riskTitle"
-          [(ngModel)]="riskTitle" 
-          class="form-input" 
-          placeholder="Enter risk title"
-          required>
+        <label>Risk Title *</label>
+        <input type="text" [value]="riskTitle" (input)="riskTitle = $any($event.target).value"
+               class="form-input" placeholder="Enter risk title"/>
       </div>
 
-      <!-- Description -->
       <div class="form-group">
-        <label for="description" class="form-label">Description</label>
-        <textarea 
-          id="description" 
-          name="description"
-          [(ngModel)]="description" 
-          class="form-textarea" 
-          placeholder="Enter risk description"
-          rows="3"
-          required></textarea>
+        <label>Risk Category *</label>
+        <select [value]="category" (change)="category = $any($event.target).value" class="form-input">
+          <option value="">Select category</option>
+          <option *ngFor="let cat of categories" [value]="cat">{{ cat | titlecase }}</option>
+        </select>
       </div>
+    </div>
 
-      <!-- Risk Category -->
+    <!-- Description -->
+    <div class="form-row">
       <div class="form-group">
-        <label for="category" class="form-label">Risk Category</label>
-        <select 
-          id="category" 
-          name="category"
-          [(ngModel)]="category" 
-          class="form-select"
-          required>
-          <option value="" disabled>Select category</option>
-          <option *ngFor="let cat of categories" [value]="cat">{{cat}}</option>
+        <label>Description *</label>
+        <textarea [value]="description" (input)="description = $any($event.target).value"
+                  class="form-input" placeholder="Enter risk description" rows="3"></textarea>
+      </div>
+    </div>
+
+    <!-- Probability & Impact -->
+    <div class="form-row">
+      <div class="form-group">
+        <label>Probability *</label>
+        <select [value]="probability" (change)="probability = $any($event.target).value" class="form-input">
+          <option value="">Select probability</option>
+          <option *ngFor="let prob of probabilityLevels" [value]="prob">{{ prob | titlecase }}</option>
         </select>
       </div>
 
-      <!-- Probability and Impact Row -->
-      <div class="form-row">
-        <div class="form-group">
-          <label for="probability" class="form-label">Probability</label>
-          <select 
-            id="probability" 
-            name="probability"
-            [(ngModel)]="probability" 
-            class="form-select"
-            required>
-            <option value="" disabled>Select probability</option>
-            <option *ngFor="let prob of probabilityLevels" [value]="prob">{{prob}}</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="impact" class="form-label">Impact</label>
-          <select 
-            id="impact" 
-            name="impact"
-            [(ngModel)]="impact" 
-            class="form-select"
-            required>
-            <option value="" disabled>Select impact</option>
-            <option *ngFor="let imp of impactLevels" [value]="imp">{{imp}}</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Mitigation Plan -->
       <div class="form-group">
-        <label for="mitigationPlan" class="form-label">Mitigation Plan</label>
-        <textarea 
-          id="mitigationPlan" 
-          name="mitigationPlan"
-          [(ngModel)]="mitigationPlan" 
-          class="form-textarea" 
-          placeholder="Enter mitigation plan"
-          rows="3"
-          required></textarea>
-      </div>
-
-      <!-- Progress -->
-      <div class="form-group">
-        <label for="progress" class="form-label">Progress</label>
-        <select 
-          id="progress" 
-          name="progress"
-          [(ngModel)]="progress" 
-          class="form-select"
-          required>
-          <option value="" disabled>Select progress</option>
-          <option *ngFor="let prog of progressOptions" [value]="prog">{{prog}}</option>
+        <label>Impact *</label>
+        <select [value]="impact" (change)="impact = $any($event.target).value" class="form-input">
+          <option value="">Select impact</option>
+          <option *ngFor="let imp of impactLevels" [value]="imp">{{ imp | titlecase }}</option>
         </select>
       </div>
+    </div>
 
-      <!-- Submit Button -->
-      <div class="form-actions">
-        <button 
-          type="submit" 
-          class="submit-btn"
-          [disabled]="!riskForm.valid">
-          Add Risk
-        </button>
-        <button 
-          type="button" 
-          class="reset-btn" 
-          (click)="resetForm()">
-          Reset
-        </button>
+    <!-- Mitigation Plan & Progress -->
+    <div class="form-row">
+      <div class="form-group">
+        <label>Mitigation Plan *</label>
+        <textarea [value]="mitigationPlan" (input)="mitigationPlan = $any($event.target).value"
+                  class="form-input" placeholder="Enter mitigation plan" rows="3"></textarea>
       </div>
-    </form>
-  </div>
 
-  <!-- Risk List Display -->
-  <div class="risks-list" *ngIf="risks.length > 0">
-    <h3 class="list-title">Submitted Risks ({{risks.length}})</h3>
-    
-    <div class="risk-item" *ngFor="let risk of risks" [class]="getRiskPriorityClass(risk.probability, risk.impact)">
-      <div class="risk-header">
-        <div class="risk-title-section">
-          <h4 class="risk-title">{{risk.title}}</h4>
-          <span class="risk-category">{{risk.category}}</span>
-          <span class="risk-priority">{{getRiskPriorityClass(risk.probability, risk.impact) | titlecase}}</span>
-        </div>
-        <button class="delete-btn" (click)="deleteRisk(risk.id)" title="Delete Risk">
-          <i class="fas fa-trash"></i>
-        </button>
+      <div class="form-group">
+        <label>Progress *</label>
+        <select [value]="progress" (change)="progress = $any($event.target).value" class="form-input">
+          <option value="">Select progress</option>
+          <option *ngFor="let prog of progressOptions" [value]="prog">{{ prog | titlecase }}</option>
+        </select>
       </div>
-      
-      <div class="risk-content">
-        <div class="risk-description">
-          <strong>Description:</strong>
-          <p>{{risk.description}}</p>
-        </div>
+    </div>
 
-        <div class="risk-details">
-          <div class="detail-item">
-            <span class="detail-label">Probability:</span>
-            <span class="detail-value probability-{{risk.probability.toLowerCase()}}">{{risk.probability}}</span>
-          </div>
-          <div class="detail-item">
-            <span class="detail-label">Impact:</span>
-            <span class="detail-value impact-{{risk.impact.toLowerCase()}}">{{risk.impact}}</span>
-          </div>
-          <div class="detail-item">
-            <span class="detail-label">Progress:</span>
-            <span class="detail-value progress-{{risk.progress.toLowerCase().replace(' ', '-')}}">{{risk.progress}}</span>
-          </div>
-        </div>
-
-        <div class="risk-mitigation">
-          <strong>Mitigation Plan:</strong>
-          <p>{{risk.mitigationPlan}}</p>
-        </div>
-
-        <div class="risk-meta">
-          <small class="created-date">Created: {{risk.createdAt | date:'short'}}</small>
-        </div>
-      </div>
+    <!-- Action Buttons -->
+    <div class="form-actions">
+      <button type="button" (click)="onSubmit()" class="btn-primary">Add Risk</button>
     </div>
   </div>
 
-  <!-- Empty State -->
-  <div class="empty-state" *ngIf="risks.length === 0">
-    <div class="empty-icon">
-      <i class="fas fa-exclamation-triangle"></i>
+  <!-- Show submitted risks -->
+  <div *ngIf="risks.length > 0" class="submitted-data">
+    <h3>Risk List</h3>
+    <div class="data-list">
+      <div *ngFor="let risk of risks; let i = index" class="data-item">
+        <div class="item-header">
+          <strong>Risk {{ i + 1 }}: {{ risk.title | titlecase }}</strong>
+          <span class="submitted-date">{{ risk.submittedDate | date:'medium' }}</span>
+        </div>
+        <div class="item-details">
+          <p><strong>Category:</strong> {{ risk.category | titlecase }}</p>
+          <p><strong>Description:</strong> {{ risk.description }}</p>
+          <p><strong>Probability:</strong> {{ risk.probability | uppercase }}</p>
+          <p><strong>Impact:</strong> {{ risk.impact | uppercase }}</p>
+          <p><strong>Mitigation:</strong> {{ risk.mitigationPlan }}</p>
+          <p><strong>Progress:</strong> {{ risk.progress | titlecase }}</p>
+        </div>
+      </div>
     </div>
-    <h3>No Risks Added Yet</h3>
-    <p>Use the form above to add your first risk assessment.</p>
   </div>
 </div>

@@ -1,51 +1,69 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule, JsonPipe } from '@angular/common';
+import { CommonModule, UpperCasePipe, TitleCasePipe, DatePipe } from '@angular/common';
+
+interface PMFormItem {
+  fullName: string;
+  employeeId: string;
+  department: string;
+  email: string;
+  submittedDate: Date;
+}
 
 @Component({
   selector: 'app-pmform',
-  standalone: true,   // make sure if using Angular 15+ standalone
-  imports: [CommonModule, FormsModule, ReactiveFormsModule], // <-- add JsonPipe here
+  standalone: true,
+  imports: [CommonModule, UpperCasePipe, TitleCasePipe, DatePipe],
   templateUrl: './pmform.html',
   styleUrls: ['./pmform.css'],
 })
 export class Pmform {
-  pmForm: FormGroup;
-  roles = ['Manager', 'Team Lead', 'Developer'];
-  privileges = ['Read', 'Write', 'Execute'];
+  // Basic form variables
+  fullName = '';
+  employeeId = '';
+  department = '';
+  email = '';
 
-  submittedData: any = null; // for displaying after submit
+  // Department options for dropdown
+  departmentOptions = [
+    'Engineering',
+    'Product Management',
+    'Quality Assurance',
+    'DevOps',
+    'Design',
+    'Marketing',
+    'Sales',
+    'Human Resources',
+    'Finance',
+    'Operations'
+  ];
 
-  constructor(private fb: FormBuilder) {
-    this.pmForm = this.fb.group({
-      fullName: ['', [Validators.required, Validators.minLength(3)]],
-      employeeId: ['', Validators.required],
-      department: [''],
-      designation: [''],
-      email: ['', [Validators.required, Validators.email]],
-      phone: [''],
-      role: [''],
-      privileges: [[]],
-      experience: [0],
-      certifications: [''],
-      workload: [0],
-      notes: ['']
-    });
-  }
+  // Storage for submitted PM forms
+  pmForms: PMFormItem[] = [];
 
-  onPrivilegeChange(event: any) {
-    const selectedPrivileges = this.pmForm.get('privileges')?.value || [];
-    if (event.target.checked) {
-      selectedPrivileges.push(event.target.value);
-    } else {
-      const index = selectedPrivileges.indexOf(event.target.value);
-      if (index > -1) selectedPrivileges.splice(index, 1);
+  onSubmit() {
+    if (this.fullName && this.employeeId && this.email) {
+      const newPMForm: PMFormItem = {
+        fullName: this.fullName,
+        employeeId: this.employeeId,
+        department: this.department,
+        email: this.email,
+        submittedDate: new Date()
+      };
+
+      this.pmForms.push(newPMForm);
+
+      // Reset form
+      this.fullName = '';
+      this.employeeId = '';
+      this.department = '';
+      this.email = '';
     }
-    this.pmForm.get('privileges')?.setValue(selectedPrivileges);
   }
 
-  onSubmit(formValue: any) {
-    this.submittedData = formValue; // store data to show below form
-    console.log(formValue);
+  resetForm() {
+    this.fullName = '';
+    this.employeeId = '';
+    this.department = '';
+    this.email = '';
   }
 }

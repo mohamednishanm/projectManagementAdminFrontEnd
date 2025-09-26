@@ -1,45 +1,56 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { CommonModule, UpperCasePipe, TitleCasePipe, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-add-team-members',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, UpperCasePipe, TitleCasePipe, DatePipe],
   templateUrl: './add-team-members.html',
   styleUrls: ['./add-team-members.css']
 })
 export class AddTeamMembers {
-  memberName: string = '';
-  memberEmail: string = '';
-  selectedRole: string = '';
-  dropdownOpen: boolean = false;
+  // Basic form fields
+  memberName = '';
+  memberEmail = '';
+  memberRole = '';
+  memberDepartment = '';
+  memberPhone = '';
 
-  teamMembers: { name: string; role: string }[] = [];
+  // Dropdown options
+  roles = [
+    'Project Manager',
+    'Developer',
+    'Designer',
+    'Tester',
+    'Business Analyst',
+    'Team Lead'
+  ];
 
-  toggleDropdown() {
-    this.dropdownOpen = !this.dropdownOpen;
-  }
+  departments = [
+    'Information Technology',
+    'Human Resources',
+    'Finance',
+    'Marketing',
+    'Operations',
+    'Engineering'
+  ];
 
-  selectRole(role: string) {
-    this.selectedRole = role;
-    this.dropdownOpen = false;
-  }
+  isSubmitted = false;
+  submissionDate = new Date();
 
-  addMember() {
-    if (!this.memberName || !this.selectedRole) {
-      alert('Please enter a name and select a role.');
-      return;
+  onSubmit() {
+    if (this.memberName && this.memberRole && this.memberEmail) {
+      this.isSubmitted = true;
+      this.submissionDate = new Date();
     }
+  }
 
-    this.teamMembers.push({
-      name: this.memberName,
-      role: this.selectedRole
-    });
-
-    // Reset form fields
+  resetForm() {
     this.memberName = '';
     this.memberEmail = '';
-    this.selectedRole = '';
+    this.memberRole = '';
+    this.memberDepartment = '';
+    this.memberPhone = '';
+    this.isSubmitted = false;
   }
 }

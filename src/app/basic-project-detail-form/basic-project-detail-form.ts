@@ -1,52 +1,57 @@
 import { Component } from '@angular/core';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
-import { NgFor } from '@angular/common';
+import { NgIf, UpperCasePipe, TitleCasePipe, DatePipe } from '@angular/common';
+
+interface ProjectItem {
+  name: string;
+  description: string;
+  priority: string;
+  submittedDate: Date;
+}
 
 @Component({
   selector: 'app-basic-project-detail-form',
-  imports: [FontAwesomeModule, NgFor],
+  imports: [NgIf, UpperCasePipe, TitleCasePipe, DatePipe],
   templateUrl: './basic-project-detail-form.html',
   styleUrl: './basic-project-detail-form.css',
 })
 export class BasicProjectDetailForm {
-  icon = faCircleInfo;
-
-  priorityLevels = [
-    { value: 'Low', color: 'green' },
-    { value: 'Medium', color: 'orange' },
-    { value: 'High', color: 'red' },
-  ];
-
+  // Basic form variables
   projectName = '';
   projectDescription = '';
   projectPriority = '';
-  startDate = '';
-  endDate = '';
 
-  onProjectNameChange(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    this.projectName = inputElement.value;
-    console.log(this.projectName);
+  // Dropdown options for priority
+  priorities = [
+    'Low',
+    'Medium',
+    'High',
+    'Critical'
+  ];
+
+  // Storage for submitted projects
+  projects: ProjectItem[] = [];
+
+  onSubmit() {
+    if (this.projectName && this.projectDescription) {
+      const newProject: ProjectItem = {
+        name: this.projectName,
+        description: this.projectDescription,
+        priority: this.projectPriority,
+        submittedDate: new Date()
+      };
+
+      this.projects.push(newProject);
+
+      // Reset form
+      this.projectName = '';
+      this.projectDescription = '';
+      this.projectPriority = '';
+    }
   }
-  onProjectDescriptionChange(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    this.projectDescription = inputElement.value;
-    console.log(this.projectDescription);
-  }
-  onProjectPriorityChange(event: Event) {
-    const selectElement = event.target as HTMLSelectElement;
-    this.projectPriority = selectElement.value;
-    console.log(this.projectPriority);
-  }
-  onProjectStartDateChange(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    this.startDate = inputElement.value;
-    console.log(this.startDate);
-  }
-  onProjectEndDateChange(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    this.endDate = inputElement.value;
-    console.log(this.endDate);
+
+  resetForm() {
+    this.projectName = '';
+    this.projectDescription = '';
+    this.projectPriority = '';
   }
 }

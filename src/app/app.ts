@@ -8,6 +8,7 @@ import { Risk } from './risk/risk';
 import { BasicProjectDetailForm } from './basic-project-detail-form/basic-project-detail-form';
 import { Pmform } from './pmform/pmform';
 import { Milestone } from './milestone/milestone';
+import { TitleCasePipe } from '@angular/common';
 
 
 

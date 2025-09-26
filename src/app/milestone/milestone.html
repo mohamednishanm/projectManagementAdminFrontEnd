@@ -1,111 +1,78 @@
-<div class="form-section">
-  <div class="modal-header">
-    <h3 class="modal-title">Add Milestone</h3>
-  </div>
- 
-  <form (submit)="$event.preventDefault(); addMilestone()">
-    <div class="modal-body">
+<div class="milestone-container">
+  <h2>Milestone Management</h2>
+
+  <div class="form-section">
+    <!-- Milestone Name & Status -->
+    <div class="form-row">
       <div class="form-group">
-        <label class="form-label" for="milestoneName">Milestone Name *</label>
-        <input
-          type="text"
-          id="milestoneName"
-          class="form-input"
-          placeholder="Enter milestone name"
-          [(ngModel)]="milestoneName"
-          name="milestoneName"
-          required
-        />
+        <label>Milestone Name *</label>
+        <input type="text" [value]="milestoneName" (input)="milestoneName = $any($event.target).value"
+               class="form-input" placeholder="Enter milestone name"/>
       </div>
- 
+
       <div class="form-group">
-        <label class="form-label" for="milestoneDescription">Description</label>
-        <textarea
-          id="milestoneDescription"
-          class="form-input"
-          placeholder="Describe milestone objectives..."
-          [(ngModel)]="milestoneDescription"
-          name="milestoneDescription"
-        ></textarea>
-      </div>
- 
-      <div class="date-row">
-        <div class="form-group">
-          <label class="form-label" for="milestoneStartDate">Start Date *</label>
-          <input
-            type="date"
-            id="milestoneStartDate"
-            class="form-input"
-            [(ngModel)]="milestoneStartDate"
-            name="milestoneStartDate"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="milestoneEndDate">End Date *</label>
-          <input
-            type="date"
-            id="milestoneEndDate"
-            class="form-input"
-            [(ngModel)]="milestoneEndDate"
-            name="milestoneEndDate"
-            required
-          />
-        </div>
-      </div>
- 
-      <div class="form-group">
-        <label class="form-label">Initial Status *</label>
-        <div
-          class="custom-select"
-          [class.open]="dropdownOpen"
-          (click)="toggleDropdown()"
-        >
-          <div class="custom-select-trigger">
-            {{ milestoneStatus || 'Select Status' }}
-          </div>
-          <div class="custom-options" *ngIf="dropdownOpen">
-            <div
-              class="custom-option"
-              (click)="selectStatus('Pending'); $event.stopPropagation()"
-            >
-              Pending
-            </div>
-            <div
-              class="custom-option"
-              (click)="selectStatus('In Progress'); $event.stopPropagation()"
-            >
-              In Progress
-            </div>
-            <div
-              class="custom-option"
-              (click)="selectStatus('Completed'); $event.stopPropagation()"
-            >
-              Completed
-            </div>
-          </div>
-        </div>
+        <label>Status *</label>
+        <select [value]="milestoneStatus" (change)="milestoneStatus = $any($event.target).value" class="form-input">
+          <option value="">Select status</option>
+          @for (status of statusOptions; track status) {
+            <option [value]="status">{{ status | titlecase }}</option>
+          }
+        </select>
       </div>
     </div>
- 
-    <div class="modal-actions">
-      <button type="submit" class="btn-primary" id="addMilestoneConfirmBtn">
-        <i class="fas fa-check"></i> Add Milestone
-      </button>
+
+    <!-- Description -->
+    <div class="form-row">
+      <div class="form-group">
+        <label>Description</label>
+        <textarea [value]="milestoneDescription" (input)="milestoneDescription = $any($event.target).value"
+                  class="form-input" placeholder="Describe milestone objectives..." rows="3"></textarea>
+      </div>
     </div>
-  </form>
- 
-  <!-- ✅ Milestone List inside same form -->
-  <div *ngIf="milestones.length > 0" class="team-list">
-    <h3 class="section-title">Milestones</h3>
-    <ul>
-      <li *ngFor="let m of milestones">
-        <strong>{{ m.name }}</strong>  
-        ({{ m.startDate }} → {{ m.endDate }}) –  
-        <em>{{ m.status }}</em>
-      </li>
-    </ul>
+
+    <!-- Start Date & End Date -->
+    <div class="form-row">
+      <div class="form-group">
+        <label>Start Date *</label>
+        <input type="date" [value]="milestoneStartDate" (input)="milestoneStartDate = $any($event.target).value"
+               class="form-input"/>
+      </div>
+
+      <div class="form-group">
+        <label>End Date *</label>
+        <input type="date" [value]="milestoneEndDate" (input)="milestoneEndDate = $any($event.target).value"
+               class="form-input"/>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="form-actions">
+      <button type="button" (click)="onSubmit()" class="btn-primary">Add Milestone</button>
+    </div>
   </div>
+
+  <!-- Show submitted milestones -->
+  @if (milestones.length > 0) {
+    <div class="submitted-data">
+      <h3>Milestone List</h3>
+      <div class="data-list">
+        @for (milestone of milestones; track milestone; let i = $index) {
+          <div class="data-item">
+            <div class="item-header">
+              <strong>Milestone {{ i + 1 }}: {{ milestone.name | titlecase }}</strong>
+              <span class="submitted-date">{{ milestone.submittedDate | date:'medium' }}</span>
+            </div>
+            <div class="item-details">
+              <p><strong>Description:</strong> {{ milestone.description || 'No description provided' }}</p>
+              <p><strong>Start Date:</strong> {{ milestone.startDate }}</p>
+              <p><strong>End Date:</strong> {{ milestone.endDate }}</p>
+              <p><strong>Status:</strong> {{ milestone.status | titlecase }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  }
 </div>
  
  

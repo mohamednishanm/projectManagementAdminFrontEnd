@@ -1,95 +1,67 @@
 <div class="pm-container">
-  <h2 class="pmform-title">Project Manager Details</h2>
+  <h2>Project Manager Details</h2>
 
-  <!-- Form -->
-  <form [formGroup]="pmForm" (ngSubmit)="onSubmit(pmForm.value)" class="pm-form">
-
-    <!-- Name & ID -->
+  <div class="form-section">
+    <!-- Full Name & Employee ID -->
     <div class="form-row">
       <div class="form-group">
         <label>Full Name *</label>
-        <input type="text" formControlName="fullName" class="form-input"/>
-        <small *ngIf="pmForm.get('fullName')?.invalid && pmForm.get('fullName')?.touched" class="error-message">
-          Full Name is required (min 3 chars).
-        </small>
+        <input type="text" [value]="fullName" (input)="fullName = $any($event.target).value"
+               class="form-input" placeholder="Enter full name"/>
       </div>
+
       <div class="form-group">
         <label>Employee ID *</label>
-        <input type="text" formControlName="employeeId" class="form-input"/>
-        <small *ngIf="pmForm.get('employeeId')?.invalid && pmForm.get('employeeId')?.touched" class="error-message">
-          Employee ID is required.
-        </small>
+        <input type="text" [value]="employeeId" (input)="employeeId = $any($event.target).value"
+               class="form-input" placeholder="Enter employee ID"/>
       </div>
     </div>
 
-    <!-- Department -->
+    <!-- Department & Email -->
     <div class="form-row">
       <div class="form-group">
         <label>Department</label>
-        <select formControlName="department" class="form-input">
+        <select [value]="department" (change)="department = $any($event.target).value" class="form-input">
           <option value="">Select Department</option>
-          <option value="IT">Information Technology</option>
-          <option value="HR">Human Resources</option>
-          <option value="Finance">Finance</option>
-          <option value="Marketing">Marketing</option>
-          <option value="Operations">Operations</option>
-          <option value="Sales">Sales</option>
-          <option value="Engineering">Engineering</option>
-          <option value="Quality Assurance">Quality Assurance</option>
-          <option value="Research & Development">Research & Development</option>
-          <option value="Customer Support">Customer Support</option>
+          @for (dept of departmentOptions; track dept) {
+            <option [value]="dept">{{ dept }}</option>
+          }
         </select>
       </div>
-    </div>
 
-    <!-- Email & Phone -->
-    <div class="form-row">
       <div class="form-group">
         <label>Email *</label>
-        <input type="email" formControlName="email" class="form-input"/>
-        <small *ngIf="pmForm.get('email')?.invalid && pmForm.get('email')?.touched" class="error-message">
-          Valid email is required.
-        </small>
-      </div>
-      <div class="form-group">
-        <label>Phone</label>
-        <input type="text" formControlName="phone" class="form-input"/>
+        <input type="email" [value]="email" (input)="email = $any($event.target).value"
+               class="form-input" placeholder="Enter email address"/>
       </div>
     </div>
 
-
-
-
-
-    <!-- Privileges -->
-    <div class="form-group">
-      <label>Privileges</label>
-      <div class="checkbox-group">
-        <label *ngFor="let p of privileges" class="checkbox-inline">
-          <input type="checkbox" [value]="p" [checked]="pmForm.get('privileges')?.value.includes(p)" (change)="onPrivilegeChange($event)">
-          {{p}}
-        </label>
-      </div>
-    </div>
-
-
-
-    <!-- Submit -->
+    <!-- Action Buttons -->
     <div class="form-actions">
-      <button type="submit" class="btn-primary" [disabled]="pmForm.invalid">Save</button>
-    </div>
-  </form>
-
-  <!-- Submitted Data -->
-  <div *ngIf="submittedData" class="submitted-data fade-in">
-    <h3>Submitted Details</h3>
-    <div class="submitted-grid">
-      <div><strong>Name:</strong> {{ submittedData.fullName }}</div>
-      <div><strong>ID:</strong> {{ submittedData.employeeId }}</div>
-      <div><strong>Dept:</strong> {{ submittedData.department }}</div>
-      <div><strong>Email:</strong> {{ submittedData.email }}</div>
-      <div><strong>Phone:</strong> {{ submittedData.phone }}</div>
-      <div><strong>Privileges:</strong> {{ submittedData.privileges?.join(', ') }}</div>
+      <button type="button" (click)="onSubmit()" class="btn-primary">Add Project Manager</button>
     </div>
   </div>
+
+  <!-- Show submitted PM forms -->
+  @if (pmForms.length > 0) {
+    <div class="submitted-data">
+      <h3>Project Manager List</h3>
+      <div class="data-list">
+        @for (pm of pmForms; track pm; let i = $index) {
+          <div class="data-item">
+            <div class="item-header">
+              <strong>Project Manager {{ i + 1 }}</strong>
+              <span class="submitted-date">{{ pm.submittedDate | date:'medium' }}</span>
+            </div>
+            <div class="item-details">
+              <p><strong>Name:</strong> {{ pm.fullName | titlecase }}</p>
+              <p><strong>Employee ID:</strong> {{ pm.employeeId | uppercase }}</p>
+              <p><strong>Department:</strong> {{ pm.department || 'Not specified' }}</p>
+              <p><strong>Email:</strong> {{ pm.email }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  }
 </div>

@@ -1,49 +1,60 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, UpperCasePipe, TitleCasePipe, DatePipe } from '@angular/common';
+
+interface CustomerItem {
+  id: string;
+  name: string;
+  contact: string;
+  email: string;
+  address: string;
+  submittedDate: Date;
+}
 
 @Component({
   selector: 'app-customer',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [CommonModule, UpperCasePipe, TitleCasePipe, DatePipe],
   templateUrl: './customer.html',
-  styleUrls: ['./customer.css']
+  styleUrl: './customer.css'
 })
 export class Customer {
-  customerData = {
-    customerId: '',
-    customerName: '',
-    primaryContact: '',
-    emailId: '',
-    billingAddress: ''
-  };
+  // Basic form variables
+  customerId = '';
+  customerName = '';
+  primaryContact = '';
+  emailId = '';
+  billingAddress = '';
 
-  submittedCustomerData: any = null;
-  isSubmitted = false;
-
-  // Validation: check all fields are non-empty
-  private isFormValid(): boolean {
-    return Object.values(this.customerData).every(value => value && value.trim() !== '');
-  }
+  // Storage for submitted customers
+  customers: CustomerItem[] = [];
 
   onSubmit() {
-    if (this.isFormValid()) {
-      this.submittedCustomerData = { ...this.customerData };
-      this.isSubmitted = true;
-    } else {
-      alert(' Please fill in all required fields before saving.');
+    if (this.customerId && this.customerName && this.emailId) {
+      const newCustomer: CustomerItem = {
+        id: this.customerId,
+        name: this.customerName,
+        contact: this.primaryContact,
+        email: this.emailId,
+        address: this.billingAddress,
+        submittedDate: new Date()
+      };
+
+      this.customers.push(newCustomer);
+
+      // Reset form
+      this.customerId = '';
+      this.customerName = '';
+      this.primaryContact = '';
+      this.emailId = '';
+      this.billingAddress = '';
     }
   }
 
-  onCancel() {
-    this.customerData = {
-      customerId: '',
-      customerName: '',
-      primaryContact: '',
-      emailId: '',
-      billingAddress: ''
-    };
-    this.isSubmitted = false;
-    this.submittedCustomerData = null;
+  resetForm() {
+    this.customerId = '';
+    this.customerName = '';
+    this.primaryContact = '';
+    this.emailId = '';
+    this.billingAddress = '';
   }
 }

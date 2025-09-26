@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { CommonModule, UpperCasePipe, TitleCasePipe, DatePipe } from '@angular/common';
 
 interface RiskItem {
   id: number;
@@ -11,12 +10,12 @@ interface RiskItem {
   impact: string;
   mitigationPlan: string;
   progress: string;
-  createdAt: Date;
+  submittedDate: Date;
 }
 
 @Component({
   selector: 'app-risk',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, UpperCasePipe, TitleCasePipe, DatePipe],
   templateUrl: './risk.html',
   styleUrl: './risk.css'
 })
@@ -36,33 +35,31 @@ export class Risk {
   impactLevels = ['Low', 'Medium', 'High'];
   progressOptions = ['Not Started', 'In Progress', 'Completed', 'On Hold'];
 
-  // Storage for submitted risks - using regular array
+  // Storage for submitted risks
   risks: RiskItem[] = [];
   nextId = 1;
 
   onSubmit() {
     // Validate required fields
-    if (!this.riskTitle.trim() || !this.description.trim() || 
-        !this.category || !this.probability || !this.impact || 
+    if (!this.riskTitle.trim() || !this.description.trim() ||
+        !this.category || !this.probability || !this.impact ||
         !this.mitigationPlan.trim() || !this.progress) {
       alert('Please fill in all fields');
       return;
     }
 
-    // Create new risk item
     const newRisk: RiskItem = {
       id: this.nextId++,
-      title: this.riskTitle.trim(),
-      description: this.description.trim(),
+      title: this.riskTitle,
+      description: this.description,
       category: this.category,
       probability: this.probability,
       impact: this.impact,
-      mitigationPlan: this.mitigationPlan.trim(),
+      mitigationPlan: this.mitigationPlan,
       progress: this.progress,
-      createdAt: new Date()
+      submittedDate: new Date()
     };
 
-    // Add to risks array using push method
     this.risks.push(newRisk);
 
     // Reset form
@@ -77,24 +74,5 @@ export class Risk {
     this.impact = '';
     this.mitigationPlan = '';
     this.progress = '';
-  }
-
-  deleteRisk(id: number) {
-    // Find index of the risk to delete
-    const index = this.risks.findIndex(risk => risk.id === id);
-    if (index !== -1) {
-      this.risks.splice(index, 1);
-    }
-  }
-
-  getRiskPriorityClass(probability: string, impact: string): string {
-    const isHigh = (level: string) => level === 'High';
-    const isMedium = (level: string) => level === 'Medium';
-
-    if (isHigh(probability) && isHigh(impact)) return 'critical';
-    if ((isHigh(probability) && isMedium(impact)) || 
-        (isMedium(probability) && isHigh(impact))) return 'high';
-    if (isMedium(probability) && isMedium(impact)) return 'medium';
-    return 'low';
   }
 }
