@@ -23,8 +23,40 @@ export class Milestone {
   milestones: any[] = [];
 
   onSubmit() {
-    if (!this.milestoneName || !this.milestoneStartDate || !this.milestoneEndDate || !this.milestoneStatus) {
-      alert('Please fill required fields: Name, Dates, and Status.');
+    // Validation
+    if (!this.milestoneName.trim()) {
+      alert('Milestone name is required.');
+      return;
+    }
+
+    if (!this.milestoneStartDate) {
+      alert('Milestone start date is required.');
+      return;
+    }
+
+    if (!this.milestoneEndDate) {
+      alert('Milestone end date is required.');
+      return;
+    }
+
+    if (!this.milestoneStatus) {
+      alert('Please select a milestone status.');
+      return;
+    }
+
+    // Date validation
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const startDate = new Date(this.milestoneStartDate);
+    const endDate = new Date(this.milestoneEndDate);
+
+    if (startDate < today) {
+      alert('Milestone start date cannot be in the past.');
+      return;
+    }
+
+    if (endDate < startDate) {
+      alert('Milestone end date must be on or after the start date.');
       return;
     }
 

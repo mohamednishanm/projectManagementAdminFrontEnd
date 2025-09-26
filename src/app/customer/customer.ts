@@ -20,16 +20,37 @@ export class Customer {
   customer: any = null;
 
   onSubmit() {
-    if (this.customerId && this.customerName && this.emailId) {
-      this.customer = {
-        id: this.customerId,
-        name: this.customerName,
-        contact: this.primaryContact,
-        email: this.emailId,
-        address: this.billingAddress,
-        submittedDate: new Date()
-      };
+    // Validation
+    if (!this.customerId.trim()) {
+      alert('Customer ID is required.');
+      return;
     }
+
+    if (!this.customerName.trim()) {
+      alert('Customer name is required.');
+      return;
+    }
+
+    if (!this.emailId.trim()) {
+      alert('Email address is required.');
+      return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(this.emailId)) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+
+    this.customer = {
+      id: this.customerId,
+      name: this.customerName,
+      contact: this.primaryContact,
+      email: this.emailId,
+      address: this.billingAddress,
+      submittedDate: new Date()
+    };
   }
 
   resetForm() {

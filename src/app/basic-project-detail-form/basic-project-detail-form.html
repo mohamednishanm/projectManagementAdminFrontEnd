@@ -48,13 +48,11 @@
     <!-- Status -->
     <div class="form-row">
       <div class="form-group">
-        <label>Status</label>
-        <select [value]="projectStatus" (change)="projectStatus = $any($event.target).value" class="form-input">
-          <option value="">Select Status</option>
-          @for (status of statusOptions; track status) {
-            <option [value]="status">{{ status }}</option>
-          }
-        </select>
+      <label>Status</label>
+      <select [value]="projectStatus" (change)="projectStatus = $any($event.target).value" class="form-input">
+        <option value="">Select Status</option>
+        <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
+      </select>
       </div>
     </div>
 

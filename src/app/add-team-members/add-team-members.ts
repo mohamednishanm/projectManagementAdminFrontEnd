@@ -39,21 +39,51 @@ export class AddTeamMembers {
   teamMembers: any[] = [];
 
   onSubmit() {
-    if (this.memberName && this.memberRole && this.memberEmail) {
-      const newMember = {
-        name: this.memberName,
-        email: this.memberEmail,
-        role: this.memberRole,
-        department: this.memberDepartment,
-        phone: this.memberPhone,
-        submittedDate: new Date()
-      };
-
-      this.teamMembers.push(newMember);
-
-      // Reset form
-      this.resetForm();
+    // Validation
+    if (!this.memberName.trim()) {
+      alert('Member name is required.');
+      return;
     }
+
+    if (!this.memberEmail.trim()) {
+      alert('Email address is required.');
+      return;
+    }
+
+    if (!this.memberRole) {
+      alert('Please select a role.');
+      return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(this.memberEmail)) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+
+    // Phone validation (optional but if provided, must be valid)
+    if (this.memberPhone.trim()) {
+      const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+      if (!phoneRegex.test(this.memberPhone.replace(/[\s\-\(\)]/g, ''))) {
+        alert('Please enter a valid phone number.');
+        return;
+      }
+    }
+
+    const newMember = {
+      name: this.memberName,
+      email: this.memberEmail,
+      role: this.memberRole,
+      department: this.memberDepartment,
+      phone: this.memberPhone,
+      submittedDate: new Date()
+    };
+
+    this.teamMembers.push(newMember);
+
+    // Reset form
+    this.resetForm();
   }
 
   resetForm() {
